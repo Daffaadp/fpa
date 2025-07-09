@@ -3,22 +3,81 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
+<AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(to bottom, #A8E6CF, #88D8C0);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
    <children>
-      <Label layoutX="150.0" layoutY="50.0" text="LOGIN">
+      <!-- Main Title -->
+      <Label layoutX="125.0" layoutY="60.0" text="LOGIN" textFill="#2C3E50">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="32.0" />
+         </font>
+         <effect>
+            <DropShadow color="#ffffff80" offsetY="1.0" radius="2.0" />
+         </effect>
+      </Label>
+      
+      <!-- Subtitle -->
+      <Label layoutX="90.0" layoutY="105.0" text="Welcome back! Please sign in to continue" textFill="#34495E">
+         <font>
+            <Font name="System" size="14.0" />
          </font>
       </Label>
       
-      <Label layoutX="50.0" layoutY="120.0" text="Username:" />
-      <TextField fx:id="usernameField" layoutX="50.0" layoutY="140.0" prefWidth="250.0" />
+      <!-- Username Section -->
+      <VBox layoutX="50.0" layoutY="160.0" prefWidth="300.0" spacing="8.0">
+         <children>
+            <Label text="Username:" textFill="#2C3E50">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="usernameField" prefHeight="45.0" prefWidth="300.0" promptText="Enter your username" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #BDC3C7; -fx-border-radius: 8; -fx-border-width: 1; -fx-padding: 12; -fx-font-size: 14;">
+               <effect>
+                  <DropShadow color="#00000020" offsetY="2.0" radius="4.0" />
+               </effect>
+            </TextField>
+         </children>
+      </VBox>
       
-      <Label layoutX="50.0" layoutY="180.0" text="Password:" />
-      <PasswordField fx:id="passwordField" layoutX="50.0" layoutY="200.0" prefWidth="250.0" />
+      <!-- Password Section -->
+      <VBox layoutX="50.0" layoutY="240.0" prefWidth="300.0" spacing="8.0">
+         <children>
+            <Label text="Password:" textFill="#2C3E50">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="passwordField" prefHeight="45.0" prefWidth="300.0" promptText="Enter your password" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #BDC3C7; -fx-border-radius: 8; -fx-border-width: 1; -fx-padding: 12; -fx-font-size: 14;">
+               <effect>
+                  <DropShadow color="#00000020" offsetY="2.0" radius="4.0" />
+               </effect>
+            </PasswordField>
+         </children>
+      </VBox>
       
-      <Button fx:id="loginButton" layoutX="50.0" layoutY="250.0" onAction="#handleLogin" prefWidth="100.0" text="Login" />
-      <Button fx:id="registerButton" layoutX="200.0" layoutY="250.0" onAction="#handleRegister" prefWidth="100.0" text="Register" />
+      <!-- Login Button -->
+      <Button fx:id="loginButton" layoutX="50.0" layoutY="340.0" onAction="#handleLogin" prefHeight="50.0" prefWidth="300.0" text="LOGIN" textFill="white" style="-fx-background-color: #FF6B35; -fx-background-radius: 8; -fx-border-width: 0; -fx-cursor: hand;">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow color="#00000030" offsetY="3.0" radius="6.0" />
+         </effect>
+      </Button>
+      
+      <!-- Register Button -->
+      <Button fx:id="registerButton" layoutX="50.0" layoutY="410.0" onAction="#handleRegister" prefHeight="40.0" prefWidth="300.0" text="CREATE NEW ACCOUNT" textFill="#2C3E50" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #BDC3C7; -fx-border-radius: 8; -fx-border-width: 1; -fx-cursor: hand;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow color="#00000020" offsetY="2.0" radius="4.0" />
+         </effect>
+      </Button>
+      
+      <!-- Decorative Elements -->
+      <Region layoutX="50.0" layoutY="30.0" prefHeight="3.0" prefWidth="60.0" style="-fx-background-color: #FF6B35; -fx-background-radius: 2;" />
+      <Region layoutX="290.0" layoutY="30.0" prefHeight="3.0" prefWidth="60.0" style="-fx-background-color: #FF6B35; -fx-background-radius: 2;" />
    </children>
 </AnchorPane>
