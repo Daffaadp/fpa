@@ -6,21 +6,21 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(to bottom, #E8E4F3, #9B59B6, #8E44AD);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(to bottom, #E8F8F5, #A8E6CF, #7FCDCD);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
    <children>
       <!-- User Avatar Circle -->
-      <Circle centerX="200.0" centerY="120.0" fill="#ffffff" radius="50.0" stroke="#000000" strokeWidth="2.0">
+      <Circle centerX="200.0" centerY="120.0" fill="#ffffff" radius="50.0" stroke="#2C3E50" strokeWidth="2.0">
          <effect>
             <DropShadow color="#00000030" offsetY="4.0" radius="8.0" />
          </effect>
       </Circle>
       
       <!-- Avatar Face (Simple) -->
-      <Circle centerX="200.0" centerY="105.0" fill="TRANSPARENT" radius="8.0" stroke="#000000" strokeWidth="2.0" />
-      <Arc centerX="200.0" centerY="135.0" fill="TRANSPARENT" length="180.0" radiusX="15.0" radiusY="10.0" startAngle="0.0" stroke="#000000" strokeWidth="2.0" type="OPEN" />
+      <Circle centerX="200.0" centerY="105.0" fill="TRANSPARENT" radius="8.0" stroke="#2C3E50" strokeWidth="2.0" />
+      <Arc centerX="200.0" centerY="135.0" fill="TRANSPARENT" length="180.0" radiusX="15.0" radiusY="10.0" startAngle="0.0" stroke="#2C3E50" strokeWidth="2.0" type="OPEN" />
       
       <!-- Main Title -->
-      <Label layoutX="120.0" layoutY="200.0" text="Login" textFill="#000000">
+      <Label layoutX="120.0" layoutY="200.0" text="Login" textFill="#2C3E50">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
@@ -51,7 +51,7 @@
       </Label>
       
       <!-- Login Button -->
-      <Button fx:id="loginButton" layoutX="125.0" layoutY="420.0" onAction="#handleLogin" prefHeight="50.0" prefWidth="150.0" text="Login" textFill="#000000" style="-fx-background-color: #B19CD9; -fx-background-radius: 25; -fx-border-width: 0; -fx-cursor: hand;">
+      <Button fx:id="loginButton" layoutX="125.0" layoutY="420.0" onAction="#handleLogin" prefHeight="50.0" prefWidth="150.0" text="Login" textFill="white" style="-fx-background-color: #FF6B35; -fx-background-radius: 25; -fx-border-width: 0; -fx-cursor: hand;">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
