@@ -3,28 +3,40 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.paint.Color?>
 
-<AnchorPane prefHeight="450.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RegisterController">
+<AnchorPane prefHeight="450.0" prefWidth="350.0"
+            style="-fx-background-color: #DDF6FA;" 
+            xmlns="http://javafx.com/javafx/11.0.1" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="RegisterController">
    <children>
-      <Label layoutX="130.0" layoutY="30.0" text="REGISTER">
+      <Label layoutX="115.0" layoutY="30.0" text="DAFTAR" textFill="#0B2545">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="Arial Bold" size="26.0" />
          </font>
       </Label>
       
-      <Label layoutX="50.0" layoutY="80.0" text="Username:" />
-      <TextField fx:id="usernameField" layoutX="50.0" layoutY="100.0" prefWidth="250.0" />
+      <Label layoutX="50.0" layoutY="80.0" text="Username:" textFill="#0B2545" />
+      <TextField fx:id="usernameField" layoutX="50.0" layoutY="100.0" prefWidth="250.0"
+                 style="-fx-background-radius: 10; -fx-background-color: white; -fx-border-color: #00B2CA; -fx-padding: 8;" />
+
+      <Label layoutX="50.0" layoutY="140.0" text="Password:" textFill="#0B2545" />
+      <PasswordField fx:id="passwordField" layoutX="50.0" layoutY="160.0" prefWidth="250.0"
+                     style="-fx-background-radius: 10; -fx-background-color: white; -fx-border-color: #00B2CA; -fx-padding: 8;" />
       
-      <Label layoutX="50.0" layoutY="140.0" text="Password:" />
-      <PasswordField fx:id="passwordField" layoutX="50.0" layoutY="160.0" prefWidth="250.0" />
+      <Label layoutX="50.0" layoutY="200.0" text="Konfirmasi Password:" textFill="#0B2545" />
+      <PasswordField fx:id="confirmPasswordField" layoutX="50.0" layoutY="220.0" prefWidth="250.0"
+                     style="-fx-background-radius: 10; -fx-background-color: white; -fx-border-color: #00B2CA; -fx-padding: 8;" />
       
-      <Label layoutX="50.0" layoutY="200.0" text="Confirm Password:" />
-      <PasswordField fx:id="confirmPasswordField" layoutX="50.0" layoutY="220.0" prefWidth="250.0" />
+      <Label layoutX="50.0" layoutY="260.0" text="Email:" textFill="#0B2545" />
+      <TextField fx:id="emailField" layoutX="50.0" layoutY="280.0" prefWidth="250.0"
+                 style="-fx-background-radius: 10; -fx-background-color: white; -fx-border-color: #00B2CA; -fx-padding: 8;" />
       
-      <Label layoutX="50.0" layoutY="260.0" text="Email:" />
-      <TextField fx:id="emailField" layoutX="50.0" layoutY="280.0" prefWidth="250.0" />
-      
-      <Button fx:id="registerButton" layoutX="50.0" layoutY="330.0" onAction="#handleRegister" prefWidth="100.0" text="Register" />
-      <Button fx:id="backButton" layoutX="200.0" layoutY="330.0" onAction="#goBackToLogin" prefWidth="100.0" text="Back to Login" />
+      <Button fx:id="registerButton" layoutX="50.0" layoutY="330.0" onAction="#handleRegister" prefWidth="110.0" text="Daftar"
+              style="-fx-background-color: #FA5A28; -fx-text-fill: white; -fx-background-radius: 15;" />
+              
+      <Button fx:id="backButton" layoutX="190.0" layoutY="330.0" onAction="#goBackToLogin" prefWidth="110.0" text="Kembali"
+              style="-fx-background-color: #D1E8F2; -fx-text-fill: #0B2545; -fx-background-radius: 15; -fx-border-color: #00B2CA;" />
    </children>
 </AnchorPane>
