@@ -6,22 +6,21 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="598.0" prefWidth="828.0" style="-fx-background-color: linear-gradient(to bottom right, #C8F1FB, #B6ECF5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ToDoListController">
 
     <!-- Header -->
-    <VBox layoutX="50.0" layoutY="30.0" spacing="5">
+    <VBox layoutX="82.0" layoutY="25.0" spacing="5">
         <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #032B44;" text="To Do List Harian Kamu" />
         <Label style="-fx-font-size: 14px; -fx-text-fill: #032B44;" text="Senin, 20 Agustus 2027" />
     </VBox>
 
     <!-- Label Pagi -->
-    <Label layoutX="52.0" layoutY="100.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="☁ Pagi" />
+    <Label layoutX="127.0" layoutY="95.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="☁ Pagi" />
 
     <!-- Checklist Pagi -->
-    <VBox layoutX="52.0" layoutY="124.0" spacing="5">
+    <VBox layoutX="127.0" layoutY="124.0" spacing="5">
         <CheckBox text="Bangun dari tempat tidur" />
         <CheckBox text="Duduk di lantai dan bersila" />
         <CheckBox selected="true" text="Fokuskan pikiran" />
@@ -30,17 +29,17 @@
     </VBox>
 
     <!-- Label Sore -->
-    <Label layoutX="52.0" layoutY="250.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="🌇 Sore" />
+    <Label layoutX="126.0" layoutY="247.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="🌇 Sore" />
 
     <!-- Checklist Sore -->
-    <VBox layoutX="52.0" layoutY="276.0" spacing="5">
+    <VBox layoutX="126.0" layoutY="275.0" spacing="5">
         <CheckBox text="Beristirahat dari keramaian selama 5 menit" />
         <CheckBox text="Pejamkan mata" />
         <CheckBox text="Tarik napas dan buang napas" />
     </VBox>
 
     <!-- Label Malam dan Checklist -->
-    <VBox layoutX="52.0" layoutY="361.0" spacing="5">
+    <VBox layoutX="127.0" layoutY="362.0" spacing="5">
         <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="🌙 Malam" />
         <CheckBox text="Bebersih badan" />
         <CheckBox text="Memakai pakaian nyaman dan sejuk" />
@@ -48,43 +47,34 @@
     </VBox>
 
     <!-- Tombol Selesai -->
-    <Button layoutX="47.0" layoutY="470.0" style="-fx-background-color: #FFA726; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 8 16 8 16; -fx-background-radius: 8;" text="Selesai" />
-
-    <!-- Bottom Navigation Bar -->
-    <HBox alignment="CENTER" layoutY="568.0" prefHeight="25.0" prefWidth="828.0" spacing="80" style="-fx-background-color: #98E2F2;">
-        
-        <!-- Tombol Home -->
-        <Button style="-fx-background-color: transparent;">
-            <graphic>
-                <ImageView fx:id="homeImageView" fitHeight="24" fitWidth="24">
-                    <image>
-                        <Image url="@images/Home.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
-
-        <!-- Tombol Favorit -->
-        <Button style="-fx-background-color: transparent;">
-            <graphic>
-                <ImageView fx:id="favoritImageView" fitHeight="24" fitWidth="24">
-                    <image>
-                        <Image url="@images/Favorit.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
-
-        <!-- Tombol History -->
-        <Button style="-fx-background-color: transparent;">
-            <graphic>
-                <ImageView fx:id="historyImageView" fitHeight="24" fitWidth="24">
-                    <image>
-                        <Image url="@images/History.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
-
-    </HBox>
+    <Button layoutX="134.0" layoutY="469.0" style="-fx-background-color: #FFA726; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 8 16 8 16; -fx-background-radius: 8;" text="Selesai" />
+   <VBox layoutY="568.0" />
+   <VBox layoutX="-6.0" prefHeight="738.0" prefWidth="63.0" style="-fx-background-color: #A4EBF7;">
+      <children>
+           
+                       <!-- Tombol Home -->
+           <Button style="-fx-background-color: transparent;" />
+   
+                       <!-- Tombol Favorit -->
+           <Button style="-fx-background-color: transparent;" />
+   
+                       <!-- Tombol History -->
+           <Button style="-fx-background-color: transparent;" />
+      </children>
+   </VBox>
+       <ImageView fx:id="historyImageView" fitHeight="24" fitWidth="24" layoutX="14.0" layoutY="137.0">
+           <image>
+               <Image url="@images/History.png" />
+           </image>
+       </ImageView>
+       <ImageView fx:id="favoritImageView" fitHeight="24" fitWidth="24" layoutX="14.0" layoutY="83.0">
+           <image>
+               <Image url="@images/Favorit.png" />
+           </image>
+       </ImageView>
+       <ImageView fx:id="homeImageView" fitHeight="24" fitWidth="24" layoutX="14.0" layoutY="25.0" style="-fx-background-color: #33c4ff;">
+           <image>
+               <Image url="@images/Home.png" />
+           </image>
+       </ImageView>
 </AnchorPane>
