@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="450.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RegisterController">
+   <children>
+      <Label layoutX="130.0" layoutY="30.0" text="REGISTER">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      
+      <Label layoutX="50.0" layoutY="80.0" text="Username:" />
+      <TextField fx:id="usernameField" layoutX="50.0" layoutY="100.0" prefWidth="250.0" />
+      
+      <Label layoutX="50.0" layoutY="140.0" text="Password:" />
+      <PasswordField fx:id="passwordField" layoutX="50.0" layoutY="160.0" prefWidth="250.0" />
+      
+      <Label layoutX="50.0" layoutY="200.0" text="Confirm Password:" />
+      <PasswordField fx:id="confirmPasswordField" layoutX="50.0" layoutY="220.0" prefWidth="250.0" />
+      
+      <Label layoutX="50.0" layoutY="260.0" text="Email:" />
+      <TextField fx:id="emailField" layoutX="50.0" layoutY="280.0" prefWidth="250.0" />
+      
+      <Button fx:id="registerButton" layoutX="50.0" layoutY="330.0" onAction="#handleRegister" prefWidth="100.0" text="Register" />
+      <Button fx:id="backButton" layoutX="200.0" layoutY="330.0" onAction="#goBackToLogin" prefWidth="100.0" text="Back to Login" />
+   </children>
+</AnchorPane>
