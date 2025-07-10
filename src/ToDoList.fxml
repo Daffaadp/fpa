@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="598.0" prefWidth="828.0" style="-fx-background-color: linear-gradient(to bottom right, #C8F1FB, #B6ECF5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ToDoListController">
+<AnchorPane prefHeight="738.0" prefWidth="828.0" style="-fx-background-color: linear-gradient(to bottom right, #C8F1FB, #B6ECF5);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ToDoListController">
 
     <!-- Header -->
     <VBox layoutX="82.0" layoutY="25.0" spacing="5">
@@ -48,33 +48,33 @@
 
     <!-- Tombol Selesai -->
     <Button layoutX="134.0" layoutY="469.0" style="-fx-background-color: #FFA726; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 8 16 8 16; -fx-background-radius: 8;" text="Selesai" />
-   <VBox layoutY="568.0" />
-   <VBox layoutX="-6.0" prefHeight="738.0" prefWidth="63.0" style="-fx-background-color: #A4EBF7;">
-      <children>
-           
-                       <!-- Tombol Home -->
-           <Button style="-fx-background-color: transparent;" />
-   
-                       <!-- Tombol Favorit -->
-           <Button style="-fx-background-color: transparent;" />
-   
-                       <!-- Tombol History -->
-           <Button style="-fx-background-color: transparent;" />
-      </children>
-   </VBox>
-       <ImageView fx:id="historyImageView" fitHeight="24" fitWidth="24" layoutX="14.0" layoutY="137.0">
-           <image>
-               <Image url="@images/History.png" />
-           </image>
-       </ImageView>
-       <ImageView fx:id="favoritImageView" fitHeight="24" fitWidth="24" layoutX="14.0" layoutY="83.0">
-           <image>
-               <Image url="@images/Favorit.png" />
-           </image>
-       </ImageView>
-       <ImageView fx:id="homeImageView" fitHeight="24" fitWidth="24" layoutX="14.0" layoutY="25.0" style="-fx-background-color: #33c4ff;">
-           <image>
-               <Image url="@images/Home.png" />
-           </image>
-       </ImageView>
+
+    <!-- Navigasi Samping -->
+    <VBox layoutX="-6.0" prefHeight="738.0" prefWidth="63.0" style="-fx-background-color: #A4EBF7;">
+        <children>
+            <Button fx:id="homeButton" onAction="#handleHomeButtonAction" layoutY="25.0" layoutX="0" style="-fx-background-color: transparent;" />
+            <Button fx:id="favoritButton" onAction="#handleFavoritButtonAction" layoutY="83.0" layoutX="0" style="-fx-background-color: transparent;" />
+            <Button fx:id="historyButton" onAction="#handleHistoryButtonAction" layoutY="137.0" layoutX="0" style="-fx-background-color: transparent;" />
+        </children>
+    </VBox>
+
+    <!-- Ikon Navigasi -->
+    <ImageView fx:id="homeImageView" fitHeight="24" fitWidth="24" layoutX="14.0" layoutY="25.0">
+        <image>
+            <Image url="images/Home.png" />
+        </image>
+    </ImageView>
+
+    <ImageView fx:id="favoritImageView" fitHeight="24" fitWidth="24" layoutX="14.0" layoutY="83.0">
+        <image>
+            <Image url="images/Favorit.png" />
+        </image>
+    </ImageView>
+
+    <ImageView fx:id="historyImageView" fitHeight="24" fitWidth="24" layoutX="14.0" layoutY="137.0">
+        <image>
+            <Image url="images/History.png" />
+        </image>
+    </ImageView>
+
 </AnchorPane>
