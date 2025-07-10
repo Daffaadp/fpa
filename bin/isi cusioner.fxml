@@ -7,147 +7,311 @@
 <AnchorPane xmlns="http://javafx.com/javafx/8" 
             xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="App.KuesionerController" 
-            prefWidth="700" prefHeight="700" 
+            prefWidth="1000" prefHeight="700" 
             style="-fx-background-color: #e0f7fa;">
 
+    <!-- Left Sidebar Navigation -->
+    <VBox AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" 
+          AnchorPane.bottomAnchor="0" prefWidth="250"
+          style="-fx-background-color: #006064; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 2, 0);">
+        
+        <!-- App Logo/Header -->
+        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 30 20 20 20;">
+            <Label text="🍽️ LAPER" 
+                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label text="Mental Health Companion" 
+                   style="-fx-font-size: 12px; -fx-text-fill: #b2dfdb; -fx-text-alignment: center;" />
+        </VBox>
+        
+        <!-- Navigation Menu -->
+        <VBox spacing="5" style="-fx-padding: 20 10;">
+            
+            <!-- Dashboard/Home -->
+            <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15 20;">
+                <Label text="🏠" style="-fx-font-size: 18px;" />
+                <Label text="Dashboard" style="-fx-font-size: 16px; -fx-text-fill: #b2dfdb;" />
+            </HBox>
+            
+            <!-- Separator -->
+            <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
+            
+            <!-- Menu Items -->
+            <VBox spacing="2" style="-fx-padding: 10 0;">
+                
+                <!-- Membaca Artikel -->
+                <Button fx:id="btnArtikel" alignment="CENTER_LEFT" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;"
+                        onAction="#handleArtikelMenu">
+                    <graphic>
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                            <Label text="📖" style="-fx-font-size: 16px;" />
+                            <Label text="Membaca Artikel" style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" />
+                        </HBox>
+                    </graphic>
+                </Button>
+                
+                <!-- Latihan Pernapasan -->
+                <Button fx:id="btnPernapasan" alignment="CENTER_LEFT" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;"
+                        onAction="#handlePernapasanMenu">
+                    <graphic>
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                            <Label text="🧘" style="-fx-font-size: 16px;" />
+                            <Label text="Latihan Pernapasan" style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" />
+                        </HBox>
+                    </graphic>
+                </Button>
+                
+                <!-- Isi Kuesioner (Active) -->
+                <Button fx:id="btnKuesioner" alignment="CENTER_LEFT" maxWidth="Infinity"
+                        style="-fx-background-color: #4db6ac; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;"
+                        onAction="#handleKuesionerMenu">
+                    <graphic>
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                            <Label text="📊" style="-fx-font-size: 16px;" />
+                            <Label text="Isi Kuesioner" style="-fx-font-size: 14px; -fx-text-fill: white;" />
+                        </HBox>
+                    </graphic>
+                </Button>
+                
+                <!-- To Do List -->
+                <Button fx:id="btnTodoList" alignment="CENTER_LEFT" maxWidth="Infinity"
+                        style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;"
+                        onAction="#handleTodoListMenu">
+                    <graphic>
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                            <Label text="✅" style="-fx-font-size: 16px;" />
+                            <Label text="To Do List" style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" />
+                        </HBox>
+                    </graphic>
+                </Button>
+                
+            </VBox>
+            
+        </VBox>
+        
+        <!-- Bottom Section -->
+        <Region VBox.vgrow="ALWAYS" />
+        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+            <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
+            <HBox alignment="CENTER" spacing="10">
+                <Label text="👤" style="-fx-font-size: 16px;" />
+                <Label text="Profile" style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" />
+            </HBox>
+        </VBox>
+        
+    </VBox>
+
+    <!-- Main Content Area -->
     <ScrollPane fitToWidth="true" fitToHeight="true" 
-                AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" 
+                AnchorPane.leftAnchor="250" AnchorPane.topAnchor="0" 
                 AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0"
                 style="-fx-background-color: transparent; -fx-background: transparent;">
 
-        <VBox spacing="25" alignment="TOP_CENTER" style="-fx-padding: 20;">
+        <VBox fx:id="mainContent" spacing="25" alignment="TOP_CENTER" style="-fx-padding: 30;">
 
-            <!-- Header -->
-            <VBox alignment="CENTER" spacing="5">
-                <Label text="📊 Daily Questionnaire" 
-                       style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #263238;" />
-                <Label text="Answer these quick questions to check in with yourself." 
-                       style="-fx-font-size: 14px; -fx-text-fill: #455a64;" />
+            <!-- Questionnaire Content (Current Page) -->
+            <VBox fx:id="kuesionerContent" spacing="25" alignment="TOP_CENTER">
+                
+                <!-- Header -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="📊 kusioner harian :)" 
+                           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #263238;" />
+                    <Label text="jawablah pertanyaan singkat untuk mengetahui kondisi anda." 
+                           style="-fx-font-size: 14px; -fx-text-fill: #455a64;" />
+                </VBox>
+
+                <!-- Question Container -->
+                <VBox spacing="20" 
+                      style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);" 
+                      maxWidth="700">
+
+                    <!-- Question 1: Mood -->
+                    <VBox spacing="15">
+                        <Label text="1. Bagaimana perasaan Anda hari ini?" 
+                               style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #34495e;" />
+                        <VBox spacing="8">
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <Button fx:id="mood1" text="⭐" userData="1" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleMoodStar" />
+                                <Button fx:id="mood2" text="⭐" userData="2" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleMoodStar" />
+                                <Button fx:id="mood3" text="⭐" userData="3" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleMoodStar" />
+                                <Button fx:id="mood4" text="⭐" userData="4" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleMoodStar" />
+                                <Button fx:id="mood5" text="⭐" userData="5" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleMoodStar" />
+                            </HBox>
+                            <Label fx:id="moodLabel" text="Pilih rating perasaan Anda" 
+                                   style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" />
+                        </VBox>
+                    </VBox>
+
+                    <!-- Question 2: Anxiety -->
+                    <VBox spacing="15">
+                        <Label text="2. Apakah Anda merasa cemas atau khawatir hari ini?" 
+                               style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #34495e;" />
+                        <VBox spacing="8">
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <Button fx:id="anxiety1" text="⭐" userData="1" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleAnxietyStar" />
+                                <Button fx:id="anxiety2" text="⭐" userData="2" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleAnxietyStar" />
+                                <Button fx:id="anxiety3" text="⭐" userData="3" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleAnxietyStar" />
+                                <Button fx:id="anxiety4" text="⭐" userData="4" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleAnxietyStar" />
+                                <Button fx:id="anxiety5" text="⭐" userData="5" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleAnxietyStar" />
+                            </HBox>
+                            <Label fx:id="anxietyLabel" text="1 = Tidak cemas sama sekali, 5 = Sangat cemas" 
+                                   style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" />
+                        </VBox>
+                    </VBox>
+
+                    <!-- Question 3: Sleep Quality -->
+                    <VBox spacing="15">
+                        <Label text="3. Bagaimana kualitas tidur Anda tadi malam?" 
+                               style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #34495e;" />
+                        <VBox spacing="8">
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <Button fx:id="sleep1" text="⭐" userData="1" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleSleepStar" />
+                                <Button fx:id="sleep2" text="⭐" userData="2" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleSleepStar" />
+                                <Button fx:id="sleep3" text="⭐" userData="3" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleSleepStar" />
+                                <Button fx:id="sleep4" text="⭐" userData="4" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleSleepStar" />
+                                <Button fx:id="sleep5" text="⭐" userData="5" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleSleepStar" />
+                            </HBox>
+                            <Label fx:id="sleepLabel" text="1 = Tidur sangat buruk, 5 = Tidur sangat nyenyak" 
+                                   style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" />
+                        </VBox>
+                    </VBox>
+
+                    <!-- Question 4: Stress Level -->
+                    <VBox spacing="15">
+                        <Label text="4. Seberapa stres Anda hari ini?" 
+                               style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #34495e;" />
+                        <VBox spacing="8">
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <Button fx:id="stress1" text="⭐" userData="1" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleStressStar" />
+                                <Button fx:id="stress2" text="⭐" userData="2" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleStressStar" />
+                                <Button fx:id="stress3" text="⭐" userData="3" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleStressStar" />
+                                <Button fx:id="stress4" text="⭐" userData="4" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleStressStar" />
+                                <Button fx:id="stress5" text="⭐" userData="5" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleStressStar" />
+                            </HBox>
+                            <Label fx:id="stressLabel" text="1 = Tidak stres sama sekali, 5 = Sangat stres" 
+                                   style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" />
+                        </VBox>
+                    </VBox>
+
+                    <!-- Question 5: Breathing Exercise -->
+                    <VBox spacing="15">
+                        <Label text="5. Apakah Anda melakukan latihan pernapasan hari ini?" 
+                               style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #34495e;" />
+                        <VBox spacing="8">
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <Button fx:id="breathing1" text="⭐" userData="1" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleBreathingStar" />
+                                <Button fx:id="breathing2" text="⭐" userData="2" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleBreathingStar" />
+                                <Button fx:id="breathing3" text="⭐" userData="3" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleBreathingStar" />
+                                <Button fx:id="breathing4" text="⭐" userData="4" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleBreathingStar" />
+                                <Button fx:id="breathing5" text="⭐" userData="5" 
+                                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 24px; -fx-text-fill: #ddd; -fx-padding: 5;"
+                                        onAction="#handleBreathingStar" />
+                            </HBox>
+                            <Label fx:id="breathingLabel" text="1 = Tidak sama sekali, 5 = Sangat rutin" 
+                                   style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" />
+                        </VBox>
+                    </VBox>
+
+                </VBox>
+
+                <!-- Submit Button -->
+                <Button text="SUBMIT ANSWERS" fx:id="btnSubmit" 
+                        style="-fx-background-color: #006064; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 25; -fx-border-radius: 25;" 
+                        prefWidth="200" prefHeight="45" 
+                        onAction="#handleSubmit" />
+
+                <!-- Result Area -->
+                <VBox fx:id="resultArea" spacing="10" 
+                      style="-fx-background-color: #f8f9fa; -fx-padding: 20; -fx-background-radius: 10; -fx-border-radius: 10;" 
+                      maxWidth="700" visible="false">
+                    <Label fx:id="resultTitle" text="Hasil Evaluasi Harian" 
+                           style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #2c3e50;" />
+                    <Label fx:id="resultText" wrapText="true" 
+                           style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" />
+                    <Label fx:id="recommendationText" wrapText="true" 
+                           style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" />
+                </VBox>
+
             </VBox>
 
-            <!-- Question Container -->
-            <VBox spacing="20" 
-                  style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);" 
-                  maxWidth="600">
-
-                <!-- Question 1: Mood -->
-                <VBox spacing="10">
-                    <Label text="1. Bagaimana perasaan Anda hari ini?" 
-                           style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #34495e;" />
-                    <HBox spacing="15">
-                        <RadioButton fx:id="mood1" text="😊 Sangat baik" 
-                                   userData="4" toggleGroup="$moodGroup" 
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="mood2" text="🙂 Baik" 
-                                   userData="3" toggleGroup="$moodGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="mood3" text="😐 Biasa" 
-                                   userData="2" toggleGroup="$moodGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="mood4" text="😟 Kurang baik" 
-                                   userData="1" toggleGroup="$moodGroup"
-                                   style="-fx-font-size: 14px;"/>
-                    </HBox>
+            <!-- Placeholder content for other sections (initially hidden) -->
+            <VBox fx:id="artikelContent" spacing="25" alignment="TOP_CENTER" visible="false">
+                <VBox alignment="CENTER" spacing="10" 
+                      style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                    <Label text="📖 Artikel Kesehatan Mental" 
+                           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #263238;" />
+                    <Label text="Konten artikel akan ditampilkan di sini" 
+                           style="-fx-font-size: 14px; -fx-text-fill: #455a64;" />
                 </VBox>
-
-                <!-- Question 2: Anxiety -->
-                <VBox spacing="10">
-                    <Label text="2. Apakah Anda merasa cemas atau khawatir hari ini?" 
-                           style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #34495e;" />
-                    <HBox spacing="15">
-                        <RadioButton fx:id="anxiety1" text="😌 Tidak sama sekali" 
-                                   userData="1" toggleGroup="$anxietyGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="anxiety2" text="😕 Sedikit" 
-                                   userData="2" toggleGroup="$anxietyGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="anxiety3" text="😰 Cukup banyak" 
-                                   userData="3" toggleGroup="$anxietyGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="anxiety4" text="😥 Sangat banyak" 
-                                   userData="4" toggleGroup="$anxietyGroup"
-                                   style="-fx-font-size: 14px;"/>
-                    </HBox>
-                </VBox>
-
-                <!-- Question 3: Sleep Quality -->
-                <VBox spacing="10">
-                    <Label text="3. Bagaimana kualitas tidur Anda tadi malam?" 
-                           style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #34495e;" />
-                    <HBox spacing="15">
-                        <RadioButton fx:id="sleep1" text="😴 Sangat nyenyak" 
-                                   userData="4" toggleGroup="$sleepGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="sleep2" text="😊 Cukup baik" 
-                                   userData="3" toggleGroup="$sleepGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="sleep3" text="😐 Biasa saja" 
-                                   userData="2" toggleGroup="$sleepGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="sleep4" text="😵 Kurang baik" 
-                                   userData="1" toggleGroup="$sleepGroup"
-                                   style="-fx-font-size: 14px;"/>
-                    </HBox>
-                </VBox>
-
-                <!-- Question 4: Stress Level -->
-                <VBox spacing="10">
-                    <Label text="4. Seberapa stres Anda hari ini?" 
-                           style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #34495e;" />
-                    <HBox spacing="15">
-                        <RadioButton fx:id="stress1" text="😌 Tidak stres" 
-                                   userData="1" toggleGroup="$stressGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="stress2" text="😊 Sedikit" 
-                                   userData="2" toggleGroup="$stressGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="stress3" text="😤 Cukup stres" 
-                                   userData="3" toggleGroup="$stressGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="stress4" text="😫 Sangat stres" 
-                                   userData="4" toggleGroup="$stressGroup"
-                                   style="-fx-font-size: 14px;"/>
-                    </HBox>
-                </VBox>
-
-                <!-- Question 5: Breathing Exercise -->
-                <VBox spacing="10">
-                    <Label text="5. Apakah Anda melakukan latihan pernapasan hari ini?" 
-                           style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #34495e;" />
-                    <HBox spacing="15">
-                        <RadioButton fx:id="breathing1" text="✅ Ya, rutin" 
-                                   userData="4" toggleGroup="$breathingGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="breathing2" text="👍 Ya, sesekali" 
-                                   userData="3" toggleGroup="$breathingGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="breathing3" text="🤔 Sedikit" 
-                                   userData="2" toggleGroup="$breathingGroup"
-                                   style="-fx-font-size: 14px;"/>
-                        <RadioButton fx:id="breathing4" text="❌ Belum" 
-                                   userData="1" toggleGroup="$breathingGroup"
-                                   style="-fx-font-size: 14px;"/>
-                    </HBox>
-                </VBox>
-
             </VBox>
 
-            <!-- Submit Button -->
-            <Button text="SUBMIT ANSWERS" fx:id="btnSubmit" 
-                    style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 25; -fx-border-radius: 25;" 
-                    prefWidth="200" prefHeight="45" 
-                    onAction="#handleSubmit" />
+            <VBox fx:id="pernapasanContent" spacing="25" alignment="TOP_CENTER" visible="false">
+                <VBox alignment="CENTER" spacing="10" 
+                      style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                    <Label text="🧘 Latihan Pernapasan" 
+                           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #263238;" />
+                    <Label text="Konten latihan pernapasan akan ditampilkan di sini" 
+                           style="-fx-font-size: 14px; -fx-text-fill: #455a64;" />
+                </VBox>
+            </VBox>
 
-            <!-- Result Area -->
-            <VBox fx:id="resultArea" spacing="10" 
-                  style="-fx-background-color: #f8f9fa; -fx-padding: 20; -fx-background-radius: 10; -fx-border-radius: 10;" 
-                  maxWidth="600" visible="false">
-                <Label fx:id="resultTitle" text="Hasil Evaluasi Harian" 
-                       style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #2c3e50;" />
-                <Label fx:id="resultText" wrapText="true" 
-                       style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" />
-                <Label fx:id="recommendationText" wrapText="true" 
-                       style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" />
+            <VBox fx:id="todoContent" spacing="25" alignment="TOP_CENTER" visible="false">
+                <VBox alignment="CENTER" spacing="10" 
+                      style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                    <Label text="✅ To Do List" 
+                           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #263238;" />
+                    <Label text="Konten to do list akan ditampilkan di sini" 
+                           style="-fx-font-size: 14px; -fx-text-fill: #455a64;" />
+                </VBox>
             </VBox>
 
         </VBox>
