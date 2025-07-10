@@ -13,7 +13,7 @@ public class Main extends Application {
             
             primaryStage.setTitle("Login System");
             primaryStage.setScene(scene);
-            primaryStage.setResizable(false);
+            primaryStage.setResizable(true  );
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
