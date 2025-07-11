@@ -7,8 +7,8 @@ import javafx.stage.Stage;
 public class MainToDoList extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("ToDoList.fxml"));
-        primaryStage.setTitle("To Do List Harian Kamu");
+        Parent root = FXMLLoader.load(getClass().getResource("ToDoList.fxml")); 
+        primaryStage.setTitle("To-Do List");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
