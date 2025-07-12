@@ -15,37 +15,42 @@
     <VBox spacing="10" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="30.0">
         <children>
             <Label style="-fx-font-size: 24px; -fx-text-fill: #032B44;" text="To Do List Harian Kamu" />
-            <Label style="-fx-font-size: 14px; -fx-text-fill: #032B44;" text="Senin, 20 Agustus 2027" />
+            <Label style="-fx-font-size: 14px; -fx-text-fill: #032B44;" text="Selasa, 22 Juli 2025" />
 
             <!-- Pagi -->
             <VBox spacing="5">
                 <children>
-                    <Label style="-fx-font-weight: bold;" text="☁ Pagi" />
-                    <CheckBox text="Bangun dari tempat tidur" />
-                    <CheckBox text="Duduk di lantai dan bersila" />
-                    <CheckBox selected="true" text="Fokuskan pikiran" />
-                    <CheckBox text="Lakukan pernafasan 1 2 3" />
-                    <CheckBox text="Minum air putih" />
+                    <Label prefHeight="17.0" prefWidth="171.0" style="-fx-font-weight: bold;" text="☁ Pagi: Energizing Breathing" />
+                    <CheckBox text="Duduk tegak atau berdiri dengan bahu rilek" />
+                    <CheckBox text="Tarik napas lewat hidung selama 4 detik" />
+                    <CheckBox selected="true" text="Tahan napas selama 4 detik" />
+                    <CheckBox text="Buang napas perlahan lewat mulut selama 4 detik" />
+                    <CheckBox text="Tahan lagi napas selama 4 detik sebelum menarik napas berikutnya" />
+               <CheckBox text="Ulangi selama 5–10 siklus" />
                 </children>
             </VBox>
 
             <!-- Sore -->
             <VBox spacing="5">
                 <children>
-                    <Label style="-fx-font-weight: bold;" text="🌇 Sore" />
-                    <CheckBox text="Beristirahat dari keramaian selama 5 menit" />
-                    <CheckBox text="Pejamkan mata" />
-                    <CheckBox text="Tarik napas dan buang napas" />
+                    <Label prefHeight="17.0" prefWidth="161.0" style="-fx-font-weight: bold;" text="🌇 Sore: Relaxing Breathing" />
+                    <CheckBox prefHeight="17.0" prefWidth="223.0" text="Duduk di kursi atau bersila di lantai" />
+                    <CheckBox text="Tarik napas pelan lewat hidung selama 4 detik" />
+                    <CheckBox text="Tahan napas selama 7 detik" />
+               <CheckBox text="Buang napas perlahan lewat mulut selama 8 detik" />
+               <CheckBox text="Ulangi 4–6 kali" />
                 </children>
             </VBox>
-
-            <!-- Malam -->
+      
+                  <!-- Malam -->
             <VBox spacing="5">
                 <children>
-                    <Label style="-fx-font-weight: bold;" text="🌙 Malam" />
-                    <CheckBox text="Bebersih badan" />
-                    <CheckBox text="Memakai pakaian nyaman dan sejuk" />
-                    <CheckBox text="Memakan buah-buahan" />
+                    <Label prefHeight="17.0" prefWidth="213.0" style="-fx-font-weight: bold;" text="🌙 Malam: Sleep-inducing Breathing" />
+                    <CheckBox text="Berbaring atau duduk nyaman, tutup mata" />
+                    <CheckBox text="Letakkan tangan di perut untuk merasakan gerakan napas" />
+                    <CheckBox text="Tarik napas dalam lewat hidung selama 5 detik, rasakan perut mengembang" />
+               <CheckBox text="Buang napas perlahan lewat mulut selama 6–7 detik, rasakan perut mengempis" />
+               <CheckBox text="Ulangi 8–10 siklus atau sampai kamu merasa mengantuk" />
                 </children>
             </VBox>
         </children>
@@ -113,7 +118,7 @@
                </VBox>
             </children>
          </VBox>
-         <Region prefWidth="250.0" VBox.vgrow="ALWAYS" />
+         <Region prefHeight="200.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
          <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
             <children>
                <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
@@ -129,5 +134,5 @@
    </VBox>
 
       <!-- Tombol selesai -->
-      <Button layoutX="270.0" layoutY="460.0" style="-fx-background-color: #FFA726; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 8 16 8 16; -fx-background-radius: 8;" text="Selesai" />
+      <Button layoutX="270.0" layoutY="571.0" style="-fx-background-color: #ff6b32; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 8 16 8 16; -fx-background-radius: 8;" text="Selesai" />
 </AnchorPane>
