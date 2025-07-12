@@ -54,7 +54,7 @@
       <children>
          <VBox alignment="CENTER" spacing="10" style="-fx-padding: 30 20 20 20;">
             <children>
-               <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" text="🍽️ LAPER" />
+               <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" text=" LAPER" />
                <Label style="-fx-font-size: 12px; -fx-text-fill: #b2dfdb; -fx-text-alignment: center;" text="Mental Health Companion" />
             </children>
          </VBox>
