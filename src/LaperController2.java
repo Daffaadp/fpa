@@ -1,5 +1,6 @@
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -80,7 +81,8 @@ public class LaperController2 implements Initializable {
         scaleTransition.setAutoReverse(true);
         scaleTransition.setCycleCount(1);
     }
-    
+
+        
     // Navbar Actions
     @FXML
     private void onDashboardClick() {
@@ -90,28 +92,28 @@ public class LaperController2 implements Initializable {
     }
     
     @FXML
-    private void onArtikelClick() {
+    private void handleArtikelMenu() {
         System.out.println("Artikel clicked");
         updateActiveNavButton(artikelBtn);
         // Add navigation logic here
     }
     
     @FXML
-    private void onPernapasanClick() {
+    private void handlePernapasanMenu() {
         System.out.println("Pernapasan clicked");
         updateActiveNavButton(pernapasanBtn);
         // Already on this page
     }
     
     @FXML
-    private void onKuesionerClick() {
+    private void handleKuesionerMenu() {
         System.out.println("Kuesioner clicked");
         updateActiveNavButton(kuesionerBtn);
         // Add navigation logic here
     }
     
     @FXML
-    private void onTodoClick() {
+    private void handleTodoListMenu() {
         System.out.println("Todo clicked");
         updateActiveNavButton(todoBtn);
         // Add navigation logic here
@@ -277,7 +279,7 @@ public class LaperController2 implements Initializable {
                 animateCircle(false);
                 break;
             case PAUSE:
-                duration = 2; // Short pause between cycles
+                duration = 3; // Short pause between cycles
                 phaseText = "Istirahat";
                 circleColor = Color.web("#4169E1");
                 break;
