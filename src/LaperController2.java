@@ -78,7 +78,7 @@ public class LaperController2 implements Initializable {
         scaleTransition.setFromY(1.0);
         scaleTransition.setToX(1.5);
         scaleTransition.setToY(1.5);
-        scaleTransition.setAutoReverse(true);
+        scaleTransition.setAutoReverse(false);
         scaleTransition.setCycleCount(1);
     }
 
@@ -171,7 +171,11 @@ public class LaperController2 implements Initializable {
         currentBreathingPhase = BreathingPhase.INHALE;
         
         // Get settings
-        maxCycles = Integer.parseInt(siklusField.getText());
+        try {
+            maxCycles = Integer.parseInt(siklusField.getText());
+        } catch (NumberFormatException e) {
+            maxCycles = 5; // Default value
+        }
         
         // Update UI
         mulaiBtn.setText("Mulai");
@@ -260,29 +264,39 @@ public class LaperController2 implements Initializable {
         String phaseText = "";
         Color circleColor = Color.web("#4169E1");
         
-        switch (currentBreathingPhase) {
-            case INHALE:
-                duration = Integer.parseInt(tarikField.getText());
-                phaseText = "Tarik";
-                circleColor = Color.web("#4CAF50");
-                animateCircle(true);
-                break;
-            case HOLD:
-                duration = Integer.parseInt(tahanField.getText());
-                phaseText = "Tahan";
-                circleColor = Color.web("#FF9800");
-                break;
-            case EXHALE:
-                duration = Integer.parseInt(hembuskanField.getText());
-                phaseText = "Hembuskan";
-                circleColor = Color.web("#F44336");
-                animateCircle(false);
-                break;
-            case PAUSE:
-                duration = 3; // Short pause between cycles
-                phaseText = "Istirahat";
-                circleColor = Color.web("#4169E1");
-                break;
+        try {
+            switch (currentBreathingPhase) {
+                case INHALE:
+                    duration = Integer.parseInt(tarikField.getText());
+                    phaseText = "Tarik";
+                    circleColor = Color.web("#4CAF50");
+                    animateCircle(duration, true);
+                    break;
+                case HOLD:
+                    duration = Integer.parseInt(tahanField.getText());
+                    phaseText = "Tahan";
+                    circleColor = Color.web("#FF9800");
+                    // No animation during hold, keep current scale
+                    break;
+                case EXHALE:
+                    duration = Integer.parseInt(hembuskanField.getText());
+                    phaseText = "Hembuskan";
+                    circleColor = Color.web("#F44336");
+                    animateCircle(duration, false);
+                    break;
+                case PAUSE:
+                    duration = 3; // Short pause between cycles
+                    phaseText = "Istirahat";
+                    circleColor = Color.web("#4169E1");
+                    // Reset to normal size during pause
+                    resetCircleSize();
+                    break;
+            }
+        } catch (NumberFormatException e) {
+            // Use default values if parsing fails
+            duration = currentBreathingPhase == BreathingPhase.INHALE ? 4 : 
+                      currentBreathingPhase == BreathingPhase.HOLD ? 4 : 
+                      currentBreathingPhase == BreathingPhase.EXHALE ? 4 : 3;
         }
         
         currentPhase = phaseText;
@@ -291,6 +305,8 @@ public class LaperController2 implements Initializable {
         
         // Start countdown
         currentCount = duration;
+        circleLabel.setText(String.valueOf(currentCount));
+        
         breathingTimeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             currentCount--;
             circleLabel.setText(String.valueOf(currentCount));
@@ -304,18 +320,35 @@ public class LaperController2 implements Initializable {
         breathingTimeline.play();
     }
     
-    private void animateCircle(boolean expand) {
+    private void animateCircle(int duration, boolean expand) {
         scaleTransition.stop();
+        
         if (expand) {
+            // Inhale - expand from current size to 1.5x
+            scaleTransition.setFromX(breathingCircle.getScaleX());
+            scaleTransition.setFromY(breathingCircle.getScaleY());
             scaleTransition.setToX(1.5);
             scaleTransition.setToY(1.5);
         } else {
-            scaleTransition.setToX(1.0);
-            scaleTransition.setToY(1.0);
+            // Exhale - shrink from current size to 0.7x (smaller than original)
+            scaleTransition.setFromX(breathingCircle.getScaleX());
+            scaleTransition.setFromY(breathingCircle.getScaleY());
+            scaleTransition.setToX(0.7);
+            scaleTransition.setToY(0.7);
         }
-        scaleTransition.setDuration(Duration.seconds(Integer.parseInt(
-            currentBreathingPhase == BreathingPhase.INHALE ? tarikField.getText() : hembuskanField.getText()
-        )));
+        
+        scaleTransition.setDuration(Duration.seconds(duration));
+        scaleTransition.setAutoReverse(false);
+        scaleTransition.play();
+    }
+    
+    private void resetCircleSize() {
+        scaleTransition.stop();
+        scaleTransition.setFromX(breathingCircle.getScaleX());
+        scaleTransition.setFromY(breathingCircle.getScaleY());
+        scaleTransition.setToX(1.0);
+        scaleTransition.setToY(1.0);
+        scaleTransition.setDuration(Duration.seconds(1));
         scaleTransition.play();
     }
     
@@ -348,6 +381,9 @@ public class LaperController2 implements Initializable {
         headerLabel.setText("Latihan selesai! Bagus!");
         currentPhase = "Selesai";
         
+        // Reset circle to normal size
+        resetCircleSize();
+        
         mulaiBtn.setDisable(false);
         jedaBtn.setDisable(true);
         setInputFieldsDisabled(false);
@@ -358,7 +394,7 @@ public class LaperController2 implements Initializable {
     private void updateProgressLabels() {
         siklusLabel.setText("Siklus: " + currentCycle + "/" + maxCycles);
         faseLabel.setText("Fase: " + currentPhase);
-        progressBar.setProgress((double) currentCycle / maxCycles);
+        progressBar.setProgress(maxCycles > 0 ? (double) currentCycle / maxCycles : 0);
     }
     
     private void setInputFieldsDisabled(boolean disabled) {
