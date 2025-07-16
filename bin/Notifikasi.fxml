@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="138.0" prefWidth="370.0" style="-fx-background-color: #E5FBFD; -fx-background-radius: ;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NotifikasiController">
+    
+    <VBox layoutX="13.0" layoutY="32.0" spacing="15">
+      <Label prefHeight="17.0" prefWidth="171.0" style="-fx-font-weight: bold;" text="☁ Pagi: Energizing Breathing" />
+
+        <Label fx:id="messageLabel" prefHeight="17.0" prefWidth="350.0" style="-fx-font-size: 12px;" text="Selamat pagi, yuk mulai hari ini dengan Energizing Breathing." wrapText="true" />
+        
+        <HBox spacing="10" />
+    </VBox>
+      <Button fx:id="closeButton" layoutX="305.0" layoutY="100.0" style="-fx-background-color: #f44336; -fx-text-fill: white;" text="Tutup" />
+      <Button fx:id="startButton" layoutX="200.0" layoutY="100.0" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Mulai Sekarang" />
+     <Label fx:id="titleLabel" layoutX="14.0" prefHeight="43.0" prefWidth="109.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="LAPER 06.00" />
+</AnchorPane>
