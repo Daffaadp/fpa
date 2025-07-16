@@ -65,12 +65,16 @@
          </VBox>
          <VBox spacing="5" style="-fx-padding: 20 10;">
             <children>
-               <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15 20;">
-                  <children>
-                     <Label style="-fx-font-size: 18px;" text="🏠" />
-                     <Label style="-fx-font-size: 16px; -fx-text-fill: #b2dfdb;" text="Dashboard" />
-                  </children>
-               </HBox>
+               <Button fx:id="btnDashboard" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleDashboardMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                  <graphic>
+                     <HBox alignment="CENTER_LEFT" spacing="12">
+                        <children>
+                           <Label style="-fx-font-size: 16px;" text="🏠" />
+                           <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Dashboard" />
+                        </children>
+                     </HBox>
+                  </graphic>
+               </Button>
                <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
                <VBox spacing="2" style="-fx-padding: 10 0;">
                   <children>
