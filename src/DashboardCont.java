@@ -80,6 +80,18 @@ public class DashboardCont {
     @FXML
     private void handleBreathingClick(MouseEvent event) {
         System.out.println("Breathing Guide clicked.");
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("Panduanbernafas1.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (root != null) {
+            Stage stage = (Stage)((javafx.scene.Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
         
     }
 
