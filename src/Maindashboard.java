@@ -1,28 +1,26 @@
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Maindashboard extends Application {
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
             Scene scene = new Scene(loader.load());
+            Parent root = loader.load();
             
-            primaryStage.setTitle("Login System");
+            primaryStage.setTitle("Dashboard");
             primaryStage.setScene(scene);
-            primaryStage.setResizable(true  );
-            primaryStage.setWidth(800);
+            primaryStage.setResizable(true);
             primaryStage.setFullScreen(true);
             primaryStage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-    
-    public static void main(String[] args) {
-        launch(args);
     }
 }

@@ -35,7 +35,7 @@ public class LoginController {
         
         if (dbManager.loginUser(username, password)) {
             showAlert("Success", "Login successful!");
-            openDashboard(username);
+            openDashboard();
         } else {
             showAlert("Error", "Invalid username or password!");
         }
@@ -55,17 +55,16 @@ public class LoginController {
         }
     }
     
-    private void openDashboard(String username) {
+    private void openDashboard() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
             Scene scene = new Scene(loader.load());
-            
-            DashboardController controller = loader.getController();
-            controller.setUsername(username);
-            
+            DashboardCont controller = loader.getController();
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Dashboard");
+            stage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
