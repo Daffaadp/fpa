@@ -42,21 +42,43 @@ public class ToDoListController {
         }
     }
 
-
     @FXML
     private void handlePernapasanMenu(ActionEvent event) {
-        showAlert("Navigasi", "Berpindah ke halaman Latihan Pernapasan.");
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Panduanbernafas1.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height); // Ukuran tetap sama
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman Artikel.");
+        }
     }
 
     @FXML
     private void handleKuesionerMenu(ActionEvent event) {
-        showAlert("Navigasi", "Berpindah ke halaman Isi Kuesioner.");
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/kusioner.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height); // Ukuran tetap sama
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman Artikel.");
+        }
     }
+
 
     @FXML
     private void handleTodoListMenu(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/ToDoList.fxml"));
             Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
             double width = stage.getWidth();
             double height = stage.getHeight();
