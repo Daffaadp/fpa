@@ -3,15 +3,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.animation.FadeTransition;
-import javafx.util.Duration;
-
+import javafx.event.ActionEvent;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class KuesionerController implements Initializable {
+
+    // ========== FXML Elements (sudah ada di FXML) ==========
+    @FXML private VBox mainContent;
+    @FXML private VBox kuesionerContent;
+    @FXML private VBox resultArea;
     
     // Navigation buttons
+    @FXML private Button btnDashboard;
     @FXML private Button btnArtikel;
     @FXML private Button btnPernapasan;
     @FXML private Button btnKuesioner;
@@ -25,249 +32,329 @@ public class KuesionerController implements Initializable {
     @FXML private Button breathing1, breathing2;
     
     // Labels
-    @FXML private Label moodLabel;
-    @FXML private Label anxietyLabel;
-    @FXML private Label sleepLabel;
-    @FXML private Label stressLabel;
-    @FXML private Label breathingLabel;
+    @FXML private Label moodLabel, anxietyLabel, sleepLabel, stressLabel, breathingLabel;
+    @FXML private Label resultTitle, resultText, recommendationText;
     
-    // Submit button and result area
+    // Submit button
     @FXML private Button btnSubmit;
-    @FXML private VBox resultArea;
-    @FXML private Label resultTitle;
-    @FXML private Label resultText;
-    @FXML private Label recommendationText;
+
+    // ========== DATA STRUCTURE ARRAYS (ditambahkan di Controller) ==========
     
-    // Main content areas
-    @FXML private VBox mainContent;
-    @FXML private VBox kuesionerContent;
-    
-    // Variables to store answers
-    private String moodAnswer = "";
-    private String anxietyAnswer = "";
-    private String sleepAnswer = "";
-    private String stressAnswer = "";
-    private String breathingAnswer = "";
-    
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // Initialize result area as hidden
-        resultArea.setVisible(false);
+    // 1. Array untuk menyimpan pertanyaan kuesioner
+    private String[] questions = {
+        "Apakah Anda merasa bahagia atau senang hari ini?",
+        "Apakah Anda merasa cemas atau khawatir berlebihan hari ini?",
+        "Apakah Anda tidur dengan nyenyak tadi malam?",
+        "Apakah Anda mengalami stres yang berat hari ini?",
+        "Apakah Anda melakukan aktivitas relaksasi (seperti meditasi atau latihan pernapasan) hari ini?"
+    };
+
+    // 2. Array untuk menyimpan deskripsi/hint setiap pertanyaan
+    private String[] questionHints = {
+        "Pilih jawaban yang sesuai dengan perasaan Anda",
+        "Kecemasan yang mengganggu aktivitas sehari-hari",
+        "Tidur yang berkualitas dan tidak terganggu",
+        "Stres yang mengganggu aktivitas atau konsentrasi",
+        "Aktivitas untuk menenangkan pikiran dan tubuh"
+    };
+
+    // 3. Array untuk menyimpan jawaban user (boolean: true = Ya, false = Tidak)
+    private boolean[] userAnswers = new boolean[5];
+
+    // 4. Array untuk menyimpan status apakah pertanyaan sudah dijawab
+    private boolean[] answeredStatus = new boolean[5];
+
+    // 5. Array untuk kategori pertanyaan (untuk analisis)
+    private String[] questionCategories = {
+        "mood", "anxiety", "sleep", "stress", "relaxation"
+    };
+
+    // 6. Array untuk bobot scoring (positif/negatif impact)
+    private int[] questionWeights = {
+        1,   // Mood positif = +1
+        -1,  // Anxiety = -1 (jawaban Ya = negatif)
+        1,   // Sleep quality = +1
+        -1,  // Stress = -1 (jawaban Ya = negatif)
+        1    // Relaxation = +1
+    };
+
+    // 7. Array untuk rekomendasi berdasarkan jawaban
+    private String[][] recommendations = {
+        // Rekomendasi untuk mood [Ya, Tidak]
+        {
+            "Hebat! Pertahankan suasana hati yang positif ini.",
+            "Coba lakukan aktivitas yang menyenangkan atau berbicara dengan teman dekat."
+        },
+        // Rekomendasi untuk anxiety [Ya, Tidak]
+        {
+            "Pertimbangkan untuk melakukan teknik relaksasi atau konsultasi dengan profesional.",
+            "Bagus! Anda berhasil mengelola kecemasan dengan baik hari ini."
+        },
+        // Rekomendasi untuk sleep [Ya, Tidak]
+        {
+            "Tidur yang berkualitas sangat baik untuk kesehatan mental Anda.",
+            "Cobalah untuk memperbaiki kualitas tidur dengan rutinitas yang konsisten."
+        },
+        // Rekomendasi untuk stress [Ya, Tidak]
+        {
+            "Pertimbangkan untuk mengurangi beban kerja atau melakukan aktivitas yang menenangkan.",
+            "Baik! Anda berhasil mengelola stres dengan efektif."
+        },
+        // Rekomendasi untuk relaxation [Ya, Tidak]
+        {
+            "Luar biasa! Aktivitas relaksasi sangat baik untuk kesehatan mental.",
+            "Cobalah untuk meluangkan waktu melakukan meditasi atau latihan pernapasan."
+        }
+    };
+
+    // 8. Array untuk menyimpan hasil evaluasi berdasarkan skor
+    private String[] evaluationResults = {
+        "Kondisi Mental: Perlu Perhatian Khusus",
+        "Kondisi Mental: Cukup Baik", 
+        "Kondisi Mental: Baik",
+        "Kondisi Mental: Sangat Baik"
+    };
+
+    // 9. Array untuk menyimpan rentang skor evaluasi
+    private int[][] scoreRanges = {
+        {-5, -3},  // Perlu perhatian khusus
+        {-2, 0},   // Cukup baik
+        {1, 3},    // Baik
+        {4, 5}     // Sangat baik
+    };
+
+    // 10. Array untuk menyimpan emoji berdasarkan hasil
+    private String[] resultEmojis = {
+        "😟",  // Perlu perhatian
+        "😐",  // Cukup baik
+        "😊",  // Baik
+        "😄"   // Sangat baik
+    };
+
+    // 11. Struktur data untuk menyimpan riwayat jawaban harian
+    public class DailyResponse {
+        String date;
+        boolean[] answers;
+        int totalScore;
+        String evaluation;
         
-        // Set up hover effects for navigation buttons
-        setupHoverEffects();
+        public DailyResponse(String date, boolean[] answers, int totalScore, String evaluation) {
+            this.date = date;
+            this.answers = answers.clone();
+            this.totalScore = totalScore;
+            this.evaluation = evaluation;
+        }
     }
+
+    // Array untuk menyimpan riwayat
+    private ArrayList<DailyResponse> responseHistory = new ArrayList<>();
+
+    // ========== INITIALIZE METHOD ==========
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // Initialize default state
+        resetQuestionnaire();
+        updateSubmitButtonState();
+    }
+
+    // ========== EVENT HANDLERS (yang ada di FXML) ==========
     
     // Navigation handlers
     @FXML
-    private void handleArtikelMenu() {
-        System.out.println("Artikel menu clicked");
-        // TODO: Implement navigation to artikel page
+    private void handleDashboardMenu(ActionEvent event) {
+        // Navigate to dashboard
     }
-    
+
     @FXML
-    private void handlePernapasanMenu() {
-        System.out.println("Pernapasan menu clicked");
-        // TODO: Implement navigation to pernapasan page
+    private void handleArtikelMenu(ActionEvent event) {
+        // Navigate to artikel
     }
-    
+
     @FXML
-    private void handleKuesionerMenu() {
-        System.out.println("Kuesioner menu clicked");
+    private void handlePernapasanMenu(ActionEvent event) {
+        // Navigate to pernapasan
+    }
+
+    @FXML
+    private void handleKuesionerMenu(ActionEvent event) {
         // Already on kuesioner page
     }
-    
+
     @FXML
-    private void handleTodoListMenu() {
-        System.out.println("Todo List menu clicked");
-        // TODO: Implement navigation to todo list page
+    private void handleTodoListMenu(ActionEvent event) {
+        // Navigate to todo list
     }
-    
-    // Question 1: Mood handlers
+
+    // Question handlers
     @FXML
-    private void handleMoodYes() {
-        moodAnswer = "yes";
-        updateButtonSelection(mood1, mood2);
-        moodLabel.setText("✓ Senang mendengarnya! Pertahankan mood positif Anda.");
-        moodLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #27ae60;");
+    private void handleMoodYes(ActionEvent event) {
+        setAnswer(0, true);
+        updateButtonStates(mood1, mood2);
     }
-    
+
     @FXML
-    private void handleMoodNo() {
-        moodAnswer = "no";
-        updateButtonSelection(mood2, mood1);
-        moodLabel.setText("Tidak apa-apa, hari yang buruk bisa terjadi pada siapa saja.");
-        moodLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #e74c3c;");
+    private void handleMoodNo(ActionEvent event) {
+        setAnswer(0, false);
+        updateButtonStates(mood2, mood1);
     }
-    
-    // Question 2: Anxiety handlers
+
     @FXML
-    private void handleAnxietyYes() {
-        anxietyAnswer = "yes";
-        updateButtonSelection(anxiety1, anxiety2);
-        anxietyLabel.setText("Coba lakukan teknik relaksasi untuk mengurangi kecemasan.");
-        anxietyLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #e74c3c;");
+    private void handleAnxietyYes(ActionEvent event) {
+        setAnswer(1, true);
+        updateButtonStates(anxiety1, anxiety2);
     }
-    
+
     @FXML
-    private void handleAnxietyNo() {
-        anxietyAnswer = "no";
-        updateButtonSelection(anxiety2, anxiety1);
-        anxietyLabel.setText("✓ Bagus! Anda berhasil mengelola kecemasan dengan baik.");
-        anxietyLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #27ae60;");
+    private void handleAnxietyNo(ActionEvent event) {
+        setAnswer(1, false);
+        updateButtonStates(anxiety2, anxiety1);
     }
-    
-    // Question 3: Sleep handlers
+
     @FXML
-    private void handleSleepYes() {
-        sleepAnswer = "yes";
-        updateButtonSelection(sleep1, sleep2);
-        sleepLabel.setText("✓ Tidur yang berkualitas sangat penting untuk kesehatan mental.");
-        sleepLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #27ae60;");
+    private void handleSleepYes(ActionEvent event) {
+        setAnswer(2, true);
+        updateButtonStates(sleep1, sleep2);
     }
-    
+
     @FXML
-    private void handleSleepNo() {
-        sleepAnswer = "no";
-        updateButtonSelection(sleep2, sleep1);
-        sleepLabel.setText("Cobalah untuk tidur lebih awal dan ciptakan rutinitas tidur yang baik.");
-        sleepLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #e74c3c;");
+    private void handleSleepNo(ActionEvent event) {
+        setAnswer(2, false);
+        updateButtonStates(sleep2, sleep1);
     }
-    
-    // Question 4: Stress handlers
+
     @FXML
-    private void handleStressYes() {
-        stressAnswer = "yes";
-        updateButtonSelection(stress1, stress2);
-        stressLabel.setText("Identifikasi sumber stres dan coba teknik manajemen stres.");
-        stressLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #e74c3c;");
+    private void handleStressYes(ActionEvent event) {
+        setAnswer(3, true);
+        updateButtonStates(stress1, stress2);
     }
-    
+
     @FXML
-    private void handleStressNo() {
-        stressAnswer = "no";
-        updateButtonSelection(stress2, stress1);
-        stressLabel.setText("✓ Hebat! Anda berhasil mengelola stres dengan baik hari ini.");
-        stressLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #27ae60;");
+    private void handleStressNo(ActionEvent event) {
+        setAnswer(3, false);
+        updateButtonStates(stress2, stress1);
     }
-    
-    // Question 5: Breathing/Relaxation handlers
+
     @FXML
-    private void handleBreathingYes() {
-        breathingAnswer = "yes";
-        updateButtonSelection(breathing1, breathing2);
-        breathingLabel.setText("✓ Luar biasa! Aktivitas relaksasi sangat baik untuk mental health.");
-        breathingLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #27ae60;");
+    private void handleBreathingYes(ActionEvent event) {
+        setAnswer(4, true);
+        updateButtonStates(breathing1, breathing2);
     }
-    
+
     @FXML
-    private void handleBreathingNo() {
-        breathingAnswer = "no";
-        updateButtonSelection(breathing2, breathing1);
-        breathingLabel.setText("Cobalah sisihkan waktu untuk aktivitas relaksasi setiap hari.");
-        breathingLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #e74c3c;");
+    private void handleBreathingNo(ActionEvent event) {
+        setAnswer(4, false);
+        updateButtonStates(breathing2, breathing1);
     }
-    
-    // Submit handler
+
     @FXML
-    private void handleSubmit() {
+    private void handleSubmit(ActionEvent event) {
         if (isAllAnswered()) {
-            calculateResult();
-            showResultWithAnimation();
-        } else {
-            // Show alert or message that all questions must be answered
-            System.out.println("Please answer all questions before submitting.");
+            processResults();
         }
     }
+
+    // ========== HELPER METHODS ==========
     
-    // Helper methods
-    private void updateButtonSelection(Button selected, Button deselected) {
+    private void setAnswer(int questionIndex, boolean answer) {
+        userAnswers[questionIndex] = answer;
+        answeredStatus[questionIndex] = true;
+        updateSubmitButtonState();
+    }
+
+    private void updateButtonStates(Button selected, Button unselected) {
         // Update selected button style
-        selected.setStyle(selected.getStyle() + " -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);");
+        selected.setStyle(selected.getStyle() + "; -fx-background-color: #4caf50; -fx-text-fill: white;");
         
-        // Reset deselected button style
-        String baseStyle = deselected.getUserData().equals("yes") ? 
-            "-fx-background-color: #e8f5e8; -fx-text-fill: #2e7d32; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #4caf50; -fx-border-width: 2;" :
-            "-fx-background-color: #fce4ec; -fx-text-fill: #c62828; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #e91e63; -fx-border-width: 2;";
-        deselected.setStyle(baseStyle);
+        // Reset unselected button style
+        String baseStyle = unselected.getUserData().equals("yes") ? 
+            "-fx-background-color: #e8f5e8; -fx-text-fill: #2e7d32;" : 
+            "-fx-background-color: #fce4ec; -fx-text-fill: #c62828;";
+        unselected.setStyle(baseStyle + " -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 20; -fx-border-radius: 20;");
     }
-    
-    private boolean isAllAnswered() {
-        return !moodAnswer.isEmpty() && !anxietyAnswer.isEmpty() && 
-               !sleepAnswer.isEmpty() && !stressAnswer.isEmpty() && 
-               !breathingAnswer.isEmpty();
+
+    private void updateSubmitButtonState() {
+        btnSubmit.setDisable(!isAllAnswered());
     }
-    
-    private void calculateResult() {
-        int positiveScore = 0;
-        int totalQuestions = 5;
+
+    private int calculateTotalScore() {
+        int totalScore = 0;
+        for (int i = 0; i < userAnswers.length; i++) {
+            if (answeredStatus[i]) {
+                totalScore += userAnswers[i] ? questionWeights[i] : -questionWeights[i];
+            }
+        }
+        return totalScore;
+    }
+
+    private String getEvaluationResult(int score) {
+        for (int i = 0; i < scoreRanges.length; i++) {
+            if (score >= scoreRanges[i][0] && score <= scoreRanges[i][1]) {
+                return evaluationResults[i];
+            }
+        }
+        return evaluationResults[1]; // Default: Cukup baik
+    }
+
+    private String getRecommendations() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Rekomendasi untuk Anda:\n\n");
         
-        // Calculate positive responses
-        if (moodAnswer.equals("yes")) positiveScore++;
-        if (anxietyAnswer.equals("no")) positiveScore++;  // No anxiety is positive
-        if (sleepAnswer.equals("yes")) positiveScore++;
-        if (stressAnswer.equals("no")) positiveScore++;   // No stress is positive
-        if (breathingAnswer.equals("yes")) positiveScore++;
-        
-        double percentage = (double) positiveScore / totalQuestions * 100;
-        
-        // Generate result and recommendation
-        String result;
-        String recommendation;
-        String titleStyle;
-        
-        if (percentage >= 80) {
-            result = "Excellent! Kesehatan mental Anda dalam kondisi sangat baik hari ini.";
-            recommendation = "Pertahankan kebiasaan positif ini dan tetap konsisten dengan rutinitas sehat Anda.";
-            titleStyle = "-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #27ae60;";
-        } else if (percentage >= 60) {
-            result = "Good! Kesehatan mental Anda cukup baik, namun masih ada ruang untuk perbaikan.";
-            recommendation = "Cobalah untuk lebih fokus pada area yang masih perlu diperbaiki, seperti kualitas tidur atau manajemen stres.";
-            titleStyle = "-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #f39c12;";
-        } else if (percentage >= 40) {
-            result = "Perlu Perhatian. Kesehatan mental Anda memerlukan perhatian lebih.";
-            recommendation = "Disarankan untuk melakukan aktivitas relaksasi, memperbaiki pola tidur, dan mengelola stres dengan lebih baik.";
-            titleStyle = "-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #e67e22;";
-        } else {
-            result = "Perlu Bantuan Segera. Kesehatan mental Anda memerlukan perhatian serius.";
-            recommendation = "Sangat disarankan untuk berkonsultasi dengan profesional kesehatan mental dan mulai menerapkan teknik self-care secara konsisten.";
-            titleStyle = "-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #e74c3c;";
+        for (int i = 0; i < userAnswers.length; i++) {
+            if (answeredStatus[i]) {
+                int answerIndex = userAnswers[i] ? 0 : 1;
+                sb.append("• ").append(recommendations[i][answerIndex]).append("\n");
+            }
         }
         
-        resultTitle.setText("Hasil Evaluasi Harian (" + String.format("%.0f", percentage) + "%)");
-        resultTitle.setStyle(titleStyle);
-        resultText.setText(result);
-        recommendationText.setText("Rekomendasi: " + recommendation);
+        return sb.toString();
     }
-    
-    private void showResultWithAnimation() {
+
+    private void processResults() {
+        int totalScore = calculateTotalScore();
+        String evaluation = getEvaluationResult(totalScore);
+        String recommendations = getRecommendations();
+        
+        // Save to history
+        String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        responseHistory.add(new DailyResponse(currentDate, userAnswers, totalScore, evaluation));
+        
+        // Display results
+        resultTitle.setText("📊 " + evaluation);
+        resultText.setText("Skor Anda: " + totalScore + "/5\n" + getScoreInterpretation(totalScore));
+        recommendationText.setText(recommendations);
+        
+        // Show result area
         resultArea.setVisible(true);
         
-        // Fade in animation
-        FadeTransition fadeIn = new FadeTransition(Duration.millis(500), resultArea);
-        fadeIn.setFromValue(0.0);
-        fadeIn.setToValue(1.0);
-        fadeIn.play();
-        
-        // Scroll to result area
-        // You might want to add scroll functionality here
+        // Scroll to results
+        mainContent.getChildren().get(mainContent.getChildren().size() - 1).requestFocus();
     }
-    
-    private void setupHoverEffects() {
-        // Add hover effects to navigation buttons
-        setupButtonHover(btnArtikel);
-        setupButtonHover(btnPernapasan);
-        setupButtonHover(btnTodoList);
-        // btnKuesioner is already active, so no hover needed
+
+    private String getScoreInterpretation(int score) {
+        if (score >= 4) return "Anda memiliki kondisi mental yang sangat baik! 😄";
+        else if (score >= 1) return "Kondisi mental Anda cukup baik. 😊";
+        else if (score >= -2) return "Kondisi mental Anda perlu sedikit perhatian. 😐";
+        else return "Kondisi mental Anda memerlukan perhatian khusus. 😟";
     }
-    
-    private void setupButtonHover(Button button) {
-        button.setOnMouseEntered(e -> {
-            button.setStyle(button.getStyle() + " -fx-background-color: #4db6ac;");
-        });
-        
-        button.setOnMouseExited(e -> {
-            button.setStyle(button.getStyle().replace(" -fx-background-color: #4db6ac;", ""));
-        });
+
+    public void resetQuestionnaire() {
+        for (int i = 0; i < userAnswers.length; i++) {
+            userAnswers[i] = false;
+            answeredStatus[i] = false;
+        }
+        resultArea.setVisible(false);
+        updateSubmitButtonState();
+    }
+
+    public boolean isAllAnswered() {
+        for (boolean answered : answeredStatus) {
+            if (!answered) return false;
+        }
+        return true;
+    }
+
+    // Getter for history (jika diperlukan di class lain)
+    public ArrayList<DailyResponse> getResponseHistory() {
+        return responseHistory;
     }
 }
