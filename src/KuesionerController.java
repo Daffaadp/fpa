@@ -1,9 +1,15 @@
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -155,37 +161,282 @@ public class KuesionerController implements Initializable {
         // Initialize default state
         resetQuestionnaire();
         updateSubmitButtonState();
+        updateActiveMenuButton();
     }
 
-    // ========== EVENT HANDLERS (yang ada di FXML) ==========
+    // ========== NAVIGATION METHODS (UPDATED) ==========
     
-    // Navigation handlers
+    /**
+     * Navigasi ke halaman Dashboard
+     */
     @FXML
     private void handleDashboardMenu(ActionEvent event) {
-        // Navigate to dashboard
+        try {
+            // Cek apakah kuesioner sedang dalam proses
+            if (hasUnsavedProgress()) {
+                if (!showConfirmationDialog("Navigasi ke Dashboard", 
+                    "Anda memiliki jawaban yang belum disimpan. Yakin ingin pindah ke Dashboard?")) {
+                    return;
+                }
+            }
+            
+            // Coba beberapa path yang mungkin
+            String[] possiblePaths = {
+                "/view/Dashboard.fxml",
+                "/fxml/Dashboard.fxml", 
+                "/Dashboard.fxml",
+                "Dashboard.fxml"
+            };
+            
+            boolean success = false;
+            for (String path : possiblePaths) {
+                try {
+                    navigateToPage(path, "LAPER - Dashboard");
+                    success = true;
+                    break;
+                } catch (Exception e) {
+                    // Continue to next path
+                }
+            }
+            
+            if (!success) {
+                showInfoAlert("Info", "Halaman Dashboard belum tersedia. Silakan buat file Dashboard.fxml terlebih dahulu.");
+            }
+            
+        } catch (Exception e) {
+            showErrorAlert("Error", "Tidak dapat membuka halaman Dashboard: " + e.getMessage());
+        }
     }
 
+    /**
+     * Navigasi ke halaman Artikel
+     */
     @FXML
     private void handleArtikelMenu(ActionEvent event) {
-        // Navigate to artikel
+        try {
+            if (hasUnsavedProgress()) {
+                if (!showConfirmationDialog("Navigasi ke Artikel", 
+                    "Anda memiliki jawaban yang belum disimpan. Yakin ingin pindah ke halaman Artikel?")) {
+                    return;
+                }
+            }
+            
+            String[] possiblePaths = {
+                "/view/Artikel.fxml",
+                "/fxml/Artikel.fxml", 
+                "/Artikel.fxml",
+                "Artikel.fxml"
+            };
+            
+            boolean success = false;
+            for (String path : possiblePaths) {
+                try {
+                    navigateToPage(path, "LAPER - Membaca Artikel");
+                    success = true;
+                    break;
+                } catch (Exception e) {
+                    // Continue to next path
+                }
+            }
+            
+            if (!success) {
+                showInfoAlert("Info", "Halaman Artikel belum tersedia. Silakan buat file Artikel.fxml terlebih dahulu.");
+            }
+            
+        } catch (Exception e) {
+            showErrorAlert("Error", "Tidak dapat membuka halaman Artikel: " + e.getMessage());
+        }
     }
 
+    /**
+     * Navigasi ke halaman Latihan Pernapasan
+     */
     @FXML
     private void handlePernapasanMenu(ActionEvent event) {
-        // Navigate to pernapasan
+        try {
+            if (hasUnsavedProgress()) {
+                if (!showConfirmationDialog("Navigasi ke Latihan Pernapasan", 
+                    "Anda memiliki jawaban yang belum disimpan. Yakin ingin pindah ke Latihan Pernapasan?")) {
+                    return;
+                }
+            }
+            
+            String[] possiblePaths = {
+                "/view/Pernapasan.fxml",
+                "/fxml/Pernapasan.fxml", 
+                "/Pernapasan.fxml",
+                "Pernapasan.fxml"
+            };
+            
+            boolean success = false;
+            for (String path : possiblePaths) {
+                try {
+                    navigateToPage(path, "LAPER - Latihan Pernapasan");
+                    success = true;
+                    break;
+                } catch (Exception e) {
+                    // Continue to next path
+                }
+            }
+            
+            if (!success) {
+                showInfoAlert("Info", "Halaman Latihan Pernapasan belum tersedia. Silakan buat file Pernapasan.fxml terlebih dahulu.");
+            }
+            
+        } catch (Exception e) {
+            showErrorAlert("Error", "Tidak dapat membuka halaman Latihan Pernapasan: " + e.getMessage());
+        }
     }
 
+    /**
+     * Refresh halaman Kuesioner (sudah di halaman ini)
+     */
     @FXML
     private void handleKuesionerMenu(ActionEvent event) {
-        // Already on kuesioner page
+        // Jika ada progress, tanyakan apakah ingin reset
+        if (hasUnsavedProgress()) {
+            if (showConfirmationDialog("Reset Kuesioner", 
+                "Apakah Anda ingin mereset kuesioner dan memulai dari awal?")) {
+                resetQuestionnaire();
+            }
+        }
+        updateActiveMenuButton();
     }
 
+    /**
+     * Navigasi ke halaman To Do List
+     */
     @FXML
     private void handleTodoListMenu(ActionEvent event) {
-        // Navigate to todo list
+        try {
+            if (hasUnsavedProgress()) {
+                if (!showConfirmationDialog("Navigasi ke To Do List", 
+                    "Anda memiliki jawaban yang belum disimpan. Yakin ingin pindah ke To Do List?")) {
+                    return;
+                }
+            }
+            
+            String[] possiblePaths = {
+                "/view/TodoList.fxml",
+                "/fxml/TodoList.fxml", 
+                "/TodoList.fxml",
+                "TodoList.fxml",
+                "/view/ToDoList.fxml",
+                "/fxml/ToDoList.fxml", 
+                "/ToDoList.fxml",
+                "ToDoList.fxml"
+            };
+            
+            boolean success = false;
+            for (String path : possiblePaths) {
+                try {
+                    navigateToPage(path, "LAPER - To Do List");
+                    success = true;
+                    break;
+                } catch (Exception e) {
+                    // Continue to next path
+                }
+            }
+            
+            if (!success) {
+                showInfoAlert("Info", "Halaman To Do List belum tersedia. Silakan buat file TodoList.fxml terlebih dahulu.");
+            }
+            
+        } catch (Exception e) {
+            showErrorAlert("Error", "Tidak dapat membuka halaman To Do List: " + e.getMessage());
+        }
     }
 
-    // Question handlers
+    // ========== HELPER METHODS FOR NAVIGATION ==========
+    
+    /**
+     * Method untuk navigasi ke halaman lain
+     */
+    private void navigateToPage(String fxmlPath, String title) throws IOException {
+        // Dapatkan Stage dari button yang diklik
+        Stage currentStage = (Stage) btnDashboard.getScene().getWindow();
+        
+        // Load FXML baru
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Parent root = loader.load();
+        
+        // Buat scene baru dan ganti
+        Scene scene = new Scene(root);
+        currentStage.setScene(scene);
+        currentStage.setTitle(title);
+        currentStage.show();
+    }
+
+    /**
+     * Cek apakah ada progress yang belum disimpan
+     */
+    private boolean hasUnsavedProgress() {
+        for (boolean answered : answeredStatus) {
+            if (answered) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Tampilkan dialog konfirmasi
+     */
+    private boolean showConfirmationDialog(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        
+        return alert.showAndWait().orElse(null) == javafx.scene.control.ButtonType.OK;
+    }
+
+    /**
+     * Tampilkan dialog error
+     */
+    private void showErrorAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    /**
+     * Tampilkan dialog info
+     */
+    private void showInfoAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    /**
+     * Update button aktif di menu
+     */
+    private void updateActiveMenuButton() {
+        // Reset semua button style
+        resetMenuButtonStyles();
+        
+        // Set style untuk button kuesioner sebagai aktif
+        btnKuesioner.setStyle("-fx-background-color: #26a69a; -fx-text-fill: white; -fx-font-weight: bold;");
+    }
+
+    /**
+     * Reset style semua menu button
+     */
+    private void resetMenuButtonStyles() {
+        String defaultStyle = "-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: normal;";
+        
+        btnDashboard.setStyle(defaultStyle);
+        btnArtikel.setStyle(defaultStyle);
+        btnPernapasan.setStyle(defaultStyle);
+        btnKuesioner.setStyle(defaultStyle);
+        btnTodoList.setStyle(defaultStyle);
+    }
+
+    // ========== EXISTING QUESTION HANDLERS ==========
+    
     @FXML
     private void handleMoodYes(ActionEvent event) {
         setAnswer(0, true);
@@ -266,7 +517,7 @@ public class KuesionerController implements Initializable {
         selected.setStyle(selected.getStyle() + "; -fx-background-color: #4caf50; -fx-text-fill: white;");
         
         // Reset unselected button style
-        String baseStyle = unselected.getUserData().equals("yes") ? 
+        String baseStyle = unselected.getUserData() != null && unselected.getUserData().equals("yes") ? 
             "-fx-background-color: #e8f5e8; -fx-text-fill: #2e7d32;" : 
             "-fx-background-color: #fce4ec; -fx-text-fill: #c62828;";
         unselected.setStyle(baseStyle + " -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 20; -fx-border-radius: 20;");
@@ -327,7 +578,9 @@ public class KuesionerController implements Initializable {
         resultArea.setVisible(true);
         
         // Scroll to results
-        mainContent.getChildren().get(mainContent.getChildren().size() - 1).requestFocus();
+        if (mainContent.getChildren().size() > 0) {
+            mainContent.getChildren().get(mainContent.getChildren().size() - 1).requestFocus();
+        }
     }
 
     private String getScoreInterpretation(int score) {
@@ -342,8 +595,31 @@ public class KuesionerController implements Initializable {
             userAnswers[i] = false;
             answeredStatus[i] = false;
         }
+        
+        // Reset button styles
+        resetQuestionButtonStyles();
+        
         resultArea.setVisible(false);
         updateSubmitButtonState();
+    }
+
+    /**
+     * Reset style semua button pertanyaan
+     */
+    private void resetQuestionButtonStyles() {
+        String yesStyle = "-fx-background-color: #e8f5e8; -fx-text-fill: #2e7d32; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 20; -fx-border-radius: 20;";
+        String noStyle = "-fx-background-color: #fce4ec; -fx-text-fill: #c62828; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 20; -fx-border-radius: 20;";
+        
+        if (mood1 != null) mood1.setStyle(yesStyle);
+        if (mood2 != null) mood2.setStyle(noStyle);
+        if (anxiety1 != null) anxiety1.setStyle(yesStyle);
+        if (anxiety2 != null) anxiety2.setStyle(noStyle);
+        if (sleep1 != null) sleep1.setStyle(yesStyle);
+        if (sleep2 != null) sleep2.setStyle(noStyle);
+        if (stress1 != null) stress1.setStyle(yesStyle);
+        if (stress2 != null) stress2.setStyle(noStyle);
+        if (breathing1 != null) breathing1.setStyle(yesStyle);
+        if (breathing2 != null) breathing2.setStyle(noStyle);
     }
 
     public boolean isAllAnswered() {
