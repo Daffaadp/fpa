@@ -24,14 +24,18 @@
                <Label style="-fx-font-size: 12px; -fx-text-fill: #b2dfdb; -fx-text-alignment: center;" text="Mental Health Companion" />
             </children>
          </VBox>
-         <VBox spacing="5" style="-fx-padding: 20 10;">
+             <VBox spacing="5" style="-fx-padding: 20 10;">
             <children>
-               <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15 20;">
-                  <children>
-                     <Label style="-fx-font-size: 18px;" text="🏠" />
-                     <Label style="-fx-font-size: 16px; -fx-text-fill: #b2dfdb;" text="Dashboard" />
-                  </children>
-               </HBox>
+               <Button fx:id="btnDashboard" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleDashboardMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                  <graphic>
+                     <HBox alignment="CENTER_LEFT" spacing="12">
+                        <children>
+                           <Label style="-fx-font-size: 16px;" text="🏠" />
+                           <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Dashboard" />
+                        </children>
+                     </HBox>
+                  </graphic>
+               </Button>
                <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
                <VBox spacing="2" style="-fx-padding: 10 0;">
                   <children>
@@ -45,27 +49,27 @@
                            </HBox>
                         </graphic>
                      </Button>
-                     <Button fx:id="btnPernapasan" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handlePernapasanMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                     <Button fx:id="btnPernapasan" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handlePernapasanMenu" style="-fx-background-color: #4db6ac; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
                         <graphic>
                            <HBox alignment="CENTER_LEFT" spacing="12">
                               <children>
                                  <Label style="-fx-font-size: 16px;" text="🧘" />
-                                 <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Latihan Pernapasan" />
+                                 <Label style="-fx-font-size: 14px; -fx-text-fill: white;" text="Latihan Pernapasan" />
                               </children>
                            </HBox>
                         </graphic>
                      </Button>
-                     <Button fx:id="btnKuesioner" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleKuesionerMenu" style="-fx-background-color: #4db6ac; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                     <Button fx:id="btnKuesioner" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleKuesionerMenu" style="-fx-background-color: t; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
                         <graphic>
                            <HBox alignment="CENTER_LEFT" spacing="12">
                               <children>
                                  <Label style="-fx-font-size: 16px;" text="📊" />
-                                 <Label style="-fx-font-size: 14px; -fx-text-fill: white;" text="Isi Kuesioner" />
+                                 <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Isi Kuesioner" />
                               </children>
                            </HBox>
                         </graphic>
                      </Button>
-                     <Button fx:id="btnTodoList" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleTodoListMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                     <Button fx:id="btnTodoList" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleTodoListMenu" style="-fx-background-color: t; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
                         <graphic>
                            <HBox alignment="CENTER_LEFT" spacing="12">
                               <children>

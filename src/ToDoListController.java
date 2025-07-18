@@ -111,9 +111,91 @@ public class ToDoListController {
                 updateTaskStatus("Tarik napas lewat hidung selama 4 detik", newVal);
             });
         }
+
+        if (cbTahanNapasPagi != null) {
+            cbTahanNapasPagi.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Tahan napas selama 4 detik", newVal);
+            });
+        }
+
+        if (cbBuangNapasPagi != null) {
+            cbBuangNapasPagi.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Buang napas perlahan lewat mulut selama 4 detik", newVal);
+            });
+        }
+
+        if (cbTahanLagiPagi != null) {
+            cbTahanLagiPagi.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Tahan lagi napas selama 4 detik sebelum menarik napas berikutnya", newVal);
+            });
+        }
+
+        if (cbUlangiPagi != null) {
+            cbUlangiPagi.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Ulangi selama 5-10 siklus", newVal);
+            });
+        }
+
+        if (cbDudukSore != null) {
+            cbDudukSore.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Duduk di kursi atau bersila di lantai", newVal);
+            });
+        }
+
+        if (cbTarikNapasSore != null) {
+            cbTarikNapasSore.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Tarik napas pelan lewat hidung selama 4 detik", newVal);
+            });
+        }
+
         
-        // Tambahkan listener untuk checkbox lainnya sesuai kebutuhan
-        // ... (implementasi serupa untuk checkbox lainnya)
+        if (cbTahanNapasSore != null) {
+            cbTahanNapasSore.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Tahan napas selama 7 detik", newVal);
+            });
+        }
+
+        if (cbBuangNapasSore != null) {
+            cbBuangNapasSore.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Buang napas perlahan lewat mulut selama 8 detik", newVal);
+            });
+        }
+
+        if (cbUlangiSore != null) {
+            cbUlangiSore.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Ulangi 4-6 kali", newVal);
+            });
+        }
+
+        if (cbBerbaringMalam != null) {
+            cbBerbaringMalam.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Berbaring atau duduk nyaman, tutup mata", newVal);
+            });
+        }
+
+        if (cbLetakkanTangan != null) {
+            cbLetakkanTangan.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Letakkan tangan di perut untuk merasakan gerakan napas", newVal);
+            });
+        }
+
+        if (cbTarikNapasMalam != null) {
+            cbTarikNapasMalam.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Tarik napas dalam lewat hidung selama 5 detik, rasakan perut mengembang", newVal);
+            });
+        }
+
+        if (cbBuangNapasMalam != null) {
+            cbBuangNapasMalam.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Buang napas perlahan lewat mulut selama 6-7 detik, rasakan perut mengempis", newVal);
+            });
+        }
+
+        if (cbUlangiMalam != null) {
+            cbUlangiMalam.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateTaskStatus("Ulangi 8-10 siklus atau sampai kamu merasa mengantuk", newVal);
+            });
+        }
     }
     
     private void updateTaskStatus(String taskName, boolean completed) {

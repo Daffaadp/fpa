@@ -4,91 +4,91 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="700" prefWidth="1000" style="-fx-background-color: #e0f7fa;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KuesionerController">
+<AnchorPane prefHeight="700" prefWidth="1000" style="-fx-background-color: #e0f7fa;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KuesionerController">
 
     <!-- Left Sidebar Navigation -->
-    <VBox prefWidth="250" style="-fx-background-color: #006064; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 2, 0);" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
-        
-        <!-- App Logo/Header -->
-        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 30 20 20 20;">
-            <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" text=" LAPER" />
-            <Label style="-fx-font-size: 12px; -fx-text-fill: #b2dfdb; -fx-text-alignment: center;" text="Mental Health Companion" />
-        </VBox>
-        
-        <!-- Dashboard Button -->
-        <VBox spacing="5" style="-fx-padding: 20 10;">
-            <Button fx:id="btnDashboard" onAction="#handleDashboardMenu" style="-fx-padding: 15 20;">
-                <graphic>
-                    <HBox alignment="CENTER_LEFT" spacing="10">
-                        <Label text="🏠" style="-fx-font-size: 18px;" />
-                        <Label text="Dashboard" style="-fx-font-size: 16px; -fx-text-fill: #b2dfdb;" />
-                    </HBox>
-                </graphic>
-            </Button>
-        </VBox>
-            
-        <!-- Separator -->
-        <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
-        
-        <!-- Menu Items -->
-        <VBox spacing="2" style="-fx-padding: 10 0;">
-            
-            <!-- Membaca Artikel -->
-            <Button fx:id="btnArtikel" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleArtikelMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
-                <graphic>
-                    <HBox alignment="CENTER_LEFT" spacing="12">
-                        <Label style="-fx-font-size: 16px;" text="📖" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Membaca Artikel" />
-                    </HBox>
-                </graphic>
-            </Button>
-            
-            <!-- Latihan Pernapasan -->
-            <Button fx:id="btnPernapasan" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handlePernapasanMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
-                <graphic>
-                    <HBox alignment="CENTER_LEFT" spacing="12">
-                        <Label style="-fx-font-size: 16px;" text="🧘" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Latihan Pernapasan" />
-                    </HBox>
-                </graphic>
-            </Button>
-            
-            <!-- Isi Kuesioner (Active) -->
-            <Button fx:id="btnKuesioner" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleKuesionerMenu" style="-fx-background-color: #4db6ac; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
-                <graphic>
-                    <HBox alignment="CENTER_LEFT" spacing="12">
-                        <Label style="-fx-font-size: 16px;" text="📊" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: white;" text="Isi Kuesioner" />
-                    </HBox>
-                </graphic>
-            </Button>
-            
-            <!-- To Do List -->
-            <Button fx:id="btnTodoList" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleTodoListMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
-                <graphic>
-                    <HBox alignment="CENTER_LEFT" spacing="12">
-                        <Label style="-fx-font-size: 16px;" text="✅" />
-                        <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="To Do List" />
-                    </HBox>
-                </graphic>
-            </Button>
-            
-        </VBox>
-        
-        <!-- Bottom Section -->
-        <Region VBox.vgrow="ALWAYS" />
-        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
-            <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
-            <HBox alignment="CENTER" spacing="10" />
-        </VBox>
-        
+<VBox prefWidth="250.0" style="-fx-background-color: #006064; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 2, 0);">
+      <children>
+         <VBox alignment="CENTER" spacing="10" style="-fx-padding: 30 20 20 20;">
+            <children>
+               <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" text=" LAPER" />
+               <Label style="-fx-font-size: 12px; -fx-text-fill: #b2dfdb; -fx-text-alignment: center;" text="Mental Health Companion" />
+            </children>
+         </VBox>
+         <VBox spacing="5" style="-fx-padding: 20 10;">
+            <children>
+               <Button fx:id="btnDashboard" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleDashboardMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                  <graphic>
+                     <HBox alignment="CENTER_LEFT" spacing="12">
+                        <children>
+                           <Label style="-fx-font-size: 16px;" text="🏠" />
+                           <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Dashboard" />
+                        </children>
+                     </HBox>
+                  </graphic>
+               </Button>
+               <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
+               <VBox spacing="2" style="-fx-padding: 10 0;">
+                  <children>
+                     <Button fx:id="btnArtikel" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleArtikelMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                        <graphic>
+                           <HBox alignment="CENTER_LEFT" spacing="12">
+                              <children>
+                                 <Label style="-fx-font-size: 16px;" text="📖" />
+                                 <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Membaca Artikel" />
+                              </children>
+                           </HBox>
+                        </graphic>
+                     </Button>
+                     <Button fx:id="btnPernapasan" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handlePernapasanMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                        <graphic>
+                           <HBox alignment="CENTER_LEFT" spacing="12">
+                              <children>
+                                 <Label style="-fx-font-size: 16px;" text="🧘" />
+                                 <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Latihan Pernapasan" />
+                              </children>
+                           </HBox>
+                        </graphic>
+                     </Button>
+                     <Button fx:id="btnKuesioner" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleKuesionerMenu" style="-fx-background-color: #4db6ac; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                        <graphic>
+                           <HBox alignment="CENTER_LEFT" spacing="12">
+                              <children>
+                                 <Label style="-fx-font-size: 16px;" text="📊" />
+                                 <Label style="-fx-font-size: 14px; -fx-text-fill: white;" text="Isi Kuesioner" />
+                              </children>
+                           </HBox>
+                        </graphic>
+                     </Button>
+                     <Button fx:id="btnTodoList" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleTodoListMenu" style="-fx-background-color: t; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                        <graphic>
+                           <HBox alignment="CENTER_LEFT" spacing="12">
+                              <children>
+                                 <Label style="-fx-font-size: 16px;" text="✅" />
+                                 <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfbd;" text="To Do List" />
+                              </children>
+                           </HBox>
+                        </graphic>
+                     </Button>
+                  </children>
+               </VBox>
+            </children>
+         </VBox>
+         <Region prefHeight="200.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
+         <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+            <children>
+               <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
+               <HBox alignment="CENTER" spacing="10" />
+            </children>
+         </VBox>
+      </children>
     </VBox>
-
     <!-- Main Content Area -->
     <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="250" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 
@@ -172,11 +172,7 @@
                 <Button fx:id="btnSubmit" onAction="#handleSubmit" prefHeight="45" prefWidth="200" style="-fx-background-color: #006064; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 25; -fx-border-radius: 25;" text="SUBMIT ANSWERS" />
 
                 <!-- Result Area -->
-                <VBox fx:id="resultArea" maxWidth="700" spacing="10" style="-fx-background-color: #f8f9fa; -fx-padding: 20; -fx-background-radius: 10; -fx-border-radius: 10;" visible="false">
-                    <Label fx:id="resultTitle" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #2c3e50;" text="Hasil Evaluasi Harian" />
-                    <Label fx:id="resultText" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" wrapText="true" />
-                    <Label fx:id="recommendationText" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" wrapText="true" />
-                </VBox>
+                <TextArea fx:id="resultArea" maxWidth="700" style="-fx-background-color: #f8f9fa; -fx-padding: 20; -fx-background-radius: 10; -fx-border-radius: 10;" visible="false" wrapText="true" />
 
             </VBox>
 
