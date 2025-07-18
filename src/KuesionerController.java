@@ -1,7 +1,14 @@
+import java.io.IOException;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -37,34 +44,92 @@ public class KuesionerController {
     // SIDEBAR MENU HANDLERS
     //=============================================
     
-    @FXML
-    private void handleDashboardMenu() {
-        System.out.println("Dashboard menu clicked");
-        
+   @FXML
+    private void handleDashboardMenu(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/dashboard.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman Dashboard.");
+        }
     }
-    
-    @FXML 
-    private void handleArtikelMenu() {
-        System.out.println("Artikel menu clicked");
-        // Tambahkan logika navigasi ke artikel di sini
-    }
-    
+
     @FXML
-    private void handlePernapasanMenu() {
-        System.out.println("Latihan Pernapasan menu clicked");
-        // Tambahkan logika navigasi ke latihan pernapasan di sini
+    private void handleArtikelMenu(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Artikel.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman Artikel.");
+        }
     }
-    
+
     @FXML
-    private void handleKuesionerMenu() {
-        System.out.println("Kuesioner menu clicked");
-        // Ini sudah di halaman kuesioner, tidak perlu action
+    private void handlePernapasanMenu(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Panduanbernafas1.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman Pernapasan.");
+        }
     }
-    
+
     @FXML
-    private void handleTodoListMenu() {
-        System.out.println("To Do List menu clicked");
-        // Tambahkan logika navigasi ke to do list di sini
+    private void handleKuesionerMenu(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/kusioner.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman Kuesioner.");
+        }
+    }
+
+    @FXML
+    private void handleTodoListMenu(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/ToDoList.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman To-Do List.");
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     //=============================================
@@ -183,7 +248,7 @@ public class KuesionerController {
          sb.append("\nKondisi mentalmu hari ini terlihat cukup stabil. Pertahankan gaya hidup sehat dan terus lakukan hal-hal positif yang mendukung kesehatan mentalmu. 👍");
         } else { // Mixed answers
          sb.append("\nAda beberapa area yang bisa kamu perbaiki untuk meningkatkan kesehatan mentalmu. Tetap pantau diri dan coba terapkan rekomendasi di atas secara rutin. 💪");
-        }
+}
         
         return sb.toString();
     }
