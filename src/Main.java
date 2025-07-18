@@ -17,6 +17,7 @@ public class Main extends Application {
             primaryStage.setWidth(800);
             primaryStage.setFullScreen(true);
             primaryStage.show();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
