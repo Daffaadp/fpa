@@ -3,12 +3,18 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.paint.Color;
+import javafx.scene.control.Alert.AlertType;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -84,46 +90,92 @@ public class LaperController2 implements Initializable {
 
         
     // Navbar Actions
-    @FXML
-    private void onDashboardClick() {
-        System.out.println("Dashboard clicked");
-        updateActiveNavButton(dashboardBtn);
-        // Add navigation logic here
+    private void showAlert(String title, String message) {
+    Alert alert = new Alert(AlertType.ERROR); // Or other appropriate type
+    alert.setTitle(title);
+    alert.setHeaderText(null); // No header text
+    alert.setContentText(message);
+    alert.showAndWait();
     }
-    
-    @FXML
-    private void handleArtikelMenu() {
-        System.out.println("Artikel clicked");
-        updateActiveNavButton(artikelBtn);
-        // Add navigation logic here
+
+       @FXML
+    private void handleDashboardMenu(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/dashboard.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman Dashboard.");
+        }
     }
-    
+
     @FXML
-    private void handlePernapasanMenu() {
-        System.out.println("Pernapasan clicked");
-        updateActiveNavButton(pernapasanBtn);
-        // Already on this page
+    private void handleArtikelMenu(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Artikel.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman Artikel.");
+        }
     }
-    
+
     @FXML
-    private void handleKuesionerMenu() {
-        System.out.println("Kuesioner clicked");
-        updateActiveNavButton(kuesionerBtn);
-        // Add navigation logic here
+    private void handlePernapasanMenu(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Panduanbernafas1.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman Pernapasan.");
+        }
     }
-    
+
     @FXML
-    private void handleTodoListMenu() {
-        System.out.println("Todo clicked");
-        updateActiveNavButton(todoBtn);
-        // Add navigation logic here
+    private void handleKuesionerMenu(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/kusioner.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman Kuesioner.");
+        }
     }
-    
+
     @FXML
-    private void onProfileClick() {
-        System.out.println("Profile clicked");
-        updateActiveNavButton(profileBtn);
-        // Add navigation logic here
+    private void handleTodoListMenu(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/ToDoList.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman To-Do List.");
+        }
     }
     
     private void updateActiveNavButton(Button activeButton) {
