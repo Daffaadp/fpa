@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -37,8 +38,6 @@
         
         <!-- Menu Items -->
         <VBox spacing="2" style="-fx-padding: 10 0;">
-            
-            <!-- Membaca Artikel -->
             <Button fx:id="btnArtikel" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleArtikelMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
                 <graphic>
                     <HBox alignment="CENTER_LEFT" spacing="12">
@@ -47,8 +46,6 @@
                     </HBox>
                 </graphic>
             </Button>
-            
-            <!-- Latihan Pernapasan -->
             <Button fx:id="btnPernapasan" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handlePernapasanMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
                 <graphic>
                     <HBox alignment="CENTER_LEFT" spacing="12">
@@ -57,8 +54,6 @@
                     </HBox>
                 </graphic>
             </Button>
-            
-            <!-- Isi Kuesioner (Active) -->
             <Button fx:id="btnKuesioner" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleKuesionerMenu" style="-fx-background-color: #4db6ac; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
                 <graphic>
                     <HBox alignment="CENTER_LEFT" spacing="12">
@@ -67,8 +62,6 @@
                     </HBox>
                 </graphic>
             </Button>
-            
-            <!-- To Do List -->
             <Button fx:id="btnTodoList" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleTodoListMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
                 <graphic>
                     <HBox alignment="CENTER_LEFT" spacing="12">
@@ -77,7 +70,6 @@
                     </HBox>
                 </graphic>
             </Button>
-            
         </VBox>
         
         <!-- Bottom Section -->
@@ -172,11 +164,7 @@
                 <Button fx:id="btnSubmit" onAction="#handleSubmit" prefHeight="45" prefWidth="200" style="-fx-background-color: #006064; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 25; -fx-border-radius: 25;" text="SUBMIT ANSWERS" />
 
                 <!-- Result Area -->
-                <VBox fx:id="resultArea" maxWidth="700" spacing="10" style="-fx-background-color: #f8f9fa; -fx-padding: 20; -fx-background-radius: 10; -fx-border-radius: 10;" visible="false">
-                    <Label fx:id="resultTitle" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #2c3e50;" text="Hasil Evaluasi Harian" />
-                    <Label fx:id="resultText" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" wrapText="true" />
-                    <Label fx:id="recommendationText" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" wrapText="true" />
-                </VBox>
+                <TextArea fx:id="resultArea" maxWidth="700" style="-fx-background-color: #f8f9fa; -fx-padding: 20; -fx-background-radius: 10; -fx-border-radius: 10;" visible="false" wrapText="true" />
 
             </VBox>
 
