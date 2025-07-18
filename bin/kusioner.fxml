@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="700" prefWidth="1000" style="-fx-background-color: #e0f7fa;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KuesionerController">
+<AnchorPane prefHeight="700" prefWidth="1000" style="-fx-background-color: #e0f7fa;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KuesionerController">
 
     <!-- Left Sidebar Navigation -->
     <VBox prefWidth="250" style="-fx-background-color: #006064; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 2, 0);" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
@@ -20,62 +20,63 @@
             <Label style="-fx-font-size: 12px; -fx-text-fill: #b2dfdb; -fx-text-alignment: center;" text="Mental Health Companion" />
         </VBox>
         
-        <!-- Navigation Menu -->
+        <!-- Dashboard Button -->
         <VBox spacing="5" style="-fx-padding: 20 10;">
+            <Button fx:id="btnDashboard" onAction="#handleDashboardMenu" style="-fx-padding: 15 20;">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="🏠" style="-fx-font-size: 18px;" />
+                        <Label text="Dashboard" style="-fx-font-size: 16px; -fx-text-fill: #b2dfdb;" />
+                    </HBox>
+                </graphic>
+            </Button>
+        </VBox>
             
-            <!-- Dashboard/Home -->
-            <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15 20;">
-                <Label style="-fx-font-size: 18px;" text="🏠" />
-                <Label style="-fx-font-size: 16px; -fx-text-fill: #b2dfdb;" text="Dashboard" />
-            </HBox>
+        <!-- Separator -->
+        <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
+        
+        <!-- Menu Items -->
+        <VBox spacing="2" style="-fx-padding: 10 0;">
             
-            <!-- Separator -->
-            <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
+            <!-- Membaca Artikel -->
+            <Button fx:id="btnArtikel" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleArtikelMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <Label style="-fx-font-size: 16px;" text="📖" />
+                        <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Membaca Artikel" />
+                    </HBox>
+                </graphic>
+            </Button>
             
-            <!-- Menu Items -->
-            <VBox spacing="2" style="-fx-padding: 10 0;">
-                
-                <!-- Membaca Artikel -->
-                <Button fx:id="btnArtikel" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleArtikelMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
-                    <graphic>
-                        <HBox alignment="CENTER_LEFT" spacing="12">
-                            <Label style="-fx-font-size: 16px;" text="📖" />
-                            <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Membaca Artikel" />
-                        </HBox>
-                    </graphic>
-                </Button>
-                
-                <!-- Latihan Pernapasan -->
-                <Button fx:id="btnPernapasan" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handlePernapasanMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
-                    <graphic>
-                        <HBox alignment="CENTER_LEFT" spacing="12">
-                            <Label style="-fx-font-size: 16px;" text="🧘" />
-                            <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Latihan Pernapasan" />
-                        </HBox>
-                    </graphic>
-                </Button>
-                
-                <!-- Isi Kuesioner (Active) -->
-                <Button fx:id="btnKuesioner" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleKuesionerMenu" style="-fx-background-color: #4db6ac; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
-                    <graphic>
-                        <HBox alignment="CENTER_LEFT" spacing="12">
-                            <Label style="-fx-font-size: 16px;" text="📊" />
-                            <Label style="-fx-font-size: 14px; -fx-text-fill: white;" text="Isi Kuesioner" />
-                        </HBox>
-                    </graphic>
-                </Button>
-                
-                <!-- To Do List -->
-                <Button fx:id="btnTodoList" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleTodoListMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
-                    <graphic>
-                        <HBox alignment="CENTER_LEFT" spacing="12">
-                            <Label style="-fx-font-size: 16px;" text="✅" />
-                            <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="To Do List" />
-                        </HBox>
-                    </graphic>
-                </Button>
-                
-            </VBox>
+            <!-- Latihan Pernapasan -->
+            <Button fx:id="btnPernapasan" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handlePernapasanMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <Label style="-fx-font-size: 16px;" text="🧘" />
+                        <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Latihan Pernapasan" />
+                    </HBox>
+                </graphic>
+            </Button>
+            
+            <!-- Isi Kuesioner (Active) -->
+            <Button fx:id="btnKuesioner" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleKuesionerMenu" style="-fx-background-color: #4db6ac; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <Label style="-fx-font-size: 16px;" text="📊" />
+                        <Label style="-fx-font-size: 14px; -fx-text-fill: white;" text="Isi Kuesioner" />
+                    </HBox>
+                </graphic>
+            </Button>
+            
+            <!-- To Do List -->
+            <Button fx:id="btnTodoList" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleTodoListMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <Label style="-fx-font-size: 16px;" text="✅" />
+                        <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="To Do List" />
+                    </HBox>
+                </graphic>
+            </Button>
             
         </VBox>
         
