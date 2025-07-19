@@ -104,6 +104,18 @@ public class DashboardCont {
     @FXML
     private void handleQuestionnairesClick(MouseEvent event) {
         System.out.println("Questionnaires clicked.");
-        // Tambahkan logika navigasi atau aksi lainnya
+         Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("kusioner.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (root != null) {
+            Stage stage = (Stage)((javafx.scene.Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+       
     }
 }
