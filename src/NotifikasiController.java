@@ -28,4 +28,9 @@ public class NotifikasiController {
             System.out.println("Sesi pernapasan dimulai...");
         });
     }
+
+    public void setNotificationContent(String title, String message) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setNotificationContent'");
+    }
 }
