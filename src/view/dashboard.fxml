@@ -90,7 +90,7 @@
                      <HBox alignment="CENTER_LEFT" spacing="12">
                         <children>
                            <Label style="-fx-font-size: 16px;" text="🔓" />
-                           <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfbd;" text="LOGOUT" />
+                           <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfbd;" text="Log-out" />
                         </children>
                      </HBox>
                   </graphic>

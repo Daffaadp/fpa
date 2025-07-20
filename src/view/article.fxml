@@ -5,6 +5,8 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -18,11 +20,11 @@
             <!-- Header -->
             <VBox alignment="CENTER" prefHeight="120.0" spacing="10.0" style="-fx-padding: 20;">
                <children>
-                  <Label text="LAPER" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Label>
+                  <ImageView fitHeight="161.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../logo.png" />
+                     </image>
+                  </ImageView>
                   <Label text="Article Management System" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
