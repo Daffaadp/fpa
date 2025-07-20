@@ -75,7 +75,7 @@
                      </HBox>
                   </graphic>
                </Button>
-               <Separator shtyle="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
+               <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
                <VBox spacing="2" style="-fx-padding: 10 0;">
                   <children>
                      <Button fx:id="btnArtikel" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleArtikelMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
