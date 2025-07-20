@@ -46,7 +46,7 @@
             </Label>
             
                                     <!-- Username -->
-            <TextField fx:id="usernameField" layoutX="23.0" layoutY="186.0" prefHeight="45.0" prefWidth="300.0" promptText="Email / No. Telepon" style="-fx-background-color: #ffffff; -fx-background-radius: 25; -fx-border-width: 0; -fx-padding: 15; -fx-font-size: 16;">
+            <TextField fx:id="usernameField" layoutX="23.0" layoutY="186.0" prefHeight="45.0" prefWidth="300.0" promptText="Nama Pengguna" style="-fx-background-color: #ffffff; -fx-background-radius: 25; -fx-border-width: 0; -fx-padding: 15; -fx-font-size: 16;">
                <effect>
                   <DropShadow color="#00000020" offsetY="3.0" radius="6.0" />
                </effect>
