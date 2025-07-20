@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="138.0" prefWidth="370.0" style="-fx-background-color: #E5FBFD; -fx-background-radius: ;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NotifikasiController">
+<AnchorPane prefHeight="138.0" prefWidth="370.0" style="-fx-background-color: #E5FBFD; -fx-background-radius: ;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NotifikasiController">
     
     <VBox layoutX="13.0" layoutY="32.0" spacing="15">
       <Label prefHeight="17.0" prefWidth="171.0" style="-fx-font-weight: bold;" text="☁ Pagi: Energizing Breathing" />

@@ -1,3 +1,4 @@
+package controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,7 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LoginController {
+public class RegisterController {
     
     @FXML
     private TextField usernameField;
@@ -16,55 +17,53 @@ public class LoginController {
     private PasswordField passwordField;
     
     @FXML
-    private Button loginButton;
+    private PasswordField confirmPasswordField;
+    
+    @FXML
+    private TextField emailField;
     
     @FXML
     private Button registerButton;
     
+    @FXML
+    private Button backButton;
+    
     private DatabaseManager dbManager = new DatabaseManager();
     
     @FXML
-    private void handleLogin() {
+    private void handleRegister() {
         String username = usernameField.getText();
         String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+        String email = emailField.getText();
         
-        if (username.isEmpty() || password.isEmpty()) {
+        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || email.isEmpty()) {
             showAlert("Error", "Please fill in all fields!");
             return;
         }
         
-        if (dbManager.loginUser(username, password)) {
-            showAlert("Success", "Login successful!");
-            openDashboard();
+        if (!password.equals(confirmPassword)) {
+            showAlert("Error", "Passwords do not match!");
+            return;
+        }
+        
+        if (dbManager.registerUser(username, password, email)) {
+            showAlert("Success", "Registration successful!");
+            goBackToLogin();
         } else {
-            showAlert("Error", "Invalid username or password!");
+            showAlert("Error", "Username already exists!");
         }
     }
     
     @FXML
-    private void handleRegister() {
+    private void goBackToLogin() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("register.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
             Scene scene = new Scene(loader.load());
             
-            Stage stage = (Stage) registerButton.getScene().getWindow();
+            Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Register");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    private void openDashboard() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
-            Scene scene = new Scene(loader.load());
-            DashboardCont controller = loader.getController();
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Dashboard");
-            stage.show();
-
+            stage.setTitle("Login");
         } catch (Exception e) {
             e.printStackTrace();
         }

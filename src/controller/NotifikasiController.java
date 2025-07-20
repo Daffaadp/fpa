@@ -1,3 +1,4 @@
+package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,5 +28,10 @@ public class NotifikasiController {
         startButton.setOnAction(event -> {
             System.out.println("Sesi pernapasan dimulai...");
         });
+    }
+
+    public void setNotificationContent(String title, String message) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setNotificationContent'");
     }
 }

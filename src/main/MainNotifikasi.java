@@ -1,3 +1,4 @@
+package main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +14,7 @@ public class MainNotifikasi extends Application {
 
     public void showNotifikasi() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Notifikasi.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Notifikasi.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
