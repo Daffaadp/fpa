@@ -58,6 +58,8 @@ public class DashboardCont {
         greetingLabel.setText(greeting);
     }
 
+    //sidebar
+
       @FXML
     private void handleDashboardMenu(ActionEvent event) {
         try {
@@ -137,6 +139,23 @@ public class DashboardCont {
             showAlert("Error", "Gagal membuka halaman To-Do List.");
         }
     }
+
+    @FXML
+    private void handleLogoutMenu(ActionEvent event) {
+        System.out.println("Logout clicked.");
+         try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman Login.");
+        }
+    }
     
      private void showAlert(String title, String message) {
     Alert alert = new Alert(AlertType.ERROR); // Or other appropriate type
@@ -145,74 +164,73 @@ public class DashboardCont {
     alert.setContentText(message);
     alert.showAndWait();
     }
-
+     //dashboard fast button
 
     @FXML
     private void handleTodoClick(MouseEvent event) {
         System.out.println("To-Do List clicked.");
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/view/ToDoList.fxml"));
+         try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/ToDoList.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        if (root != null) {
-            Stage stage = (Stage)((javafx.scene.Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            showAlert("Error", "Gagal membuka halaman To-Do List.");
         }
     }
-
+    
     @FXML
     private void handleBreathingClick(MouseEvent event) {
         System.out.println("Breathing Guide clicked.");
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/view/Panduanbernafas1.fxml"));
+           try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/Panduanbernafas1.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman Pernapasan.");
         }
-
-        if (root != null) {
-            Stage stage = (Stage)((javafx.scene.Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        }
-        
     }
 
     @FXML
     private void handleArticlesClick(MouseEvent event) {
         System.out.println("Articles clicked.");
-        Parent root = null;
-         try {
-            root = FXMLLoader.load(getClass().getResource("/view/article.fxml"));
+       try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/article.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        if (root != null) {
-            Stage stage = (Stage)((javafx.scene.Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            showAlert("Error", "Gagal membuka halaman Artikel.");
         }
     }
 
     @FXML
     private void handleQuestionnairesClick(MouseEvent event) {
         System.out.println("Questionnaires clicked.");
-         Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/view/kusioner.fxml"));
+         try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/kusioner.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        if (root != null) {
-            Stage stage = (Stage)((javafx.scene.Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            showAlert("Error", "Gagal membuka halaman Kuesioner.");
         }
        
     }

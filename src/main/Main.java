@@ -14,9 +14,8 @@ public class Main extends Application {
             
             primaryStage.setTitle("Login System");
             primaryStage.setScene(scene);
-            primaryStage.setResizable(true  );
             primaryStage.setWidth(800);
-            primaryStage.setFullScreen(true);
+            primaryStage.setFullScreen(false);
             primaryStage.show();
             
         } catch (Exception e) {

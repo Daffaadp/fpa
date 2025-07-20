@@ -35,8 +35,8 @@ public class LoginController {
         }
         
         if (dbManager.loginUser(username, password)) {
-            showAlert("Success", "Login successful!");
             openDashboard();
+            showAlert("Success", "Login successful!");
         } else {
             showAlert("Error", "Invalid username or password!");
         }
