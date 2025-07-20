@@ -8,9 +8,12 @@ import javafx.stage.Stage;
 public class MainToDoList extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/ToDoList.fxml")); 
+        Parent root = FXMLLoader.load(getClass().getResource("/view/ToDoList.fxml"));
         primaryStage.setTitle("To-Do List");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setFullScreen(true);
+        primaryStage.setMinWidth(1000);
+        primaryStage.setMinHeight(700);
         primaryStage.show();
     }
 

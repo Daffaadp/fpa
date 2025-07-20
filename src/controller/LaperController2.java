@@ -1,4 +1,6 @@
 package controller;
+
+import java.util.ArrayList;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -43,8 +45,11 @@ public class LaperController2 implements Initializable {
     @FXML private Label siklusLabel;
     @FXML private Label faseLabel;
     @FXML private ProgressBar progressBar;
+    @FXML private ListView<String> faseListView;
     
     // Breathing Exercise Variables
+    private ArrayList<Integer> durasiSetiapSiklus = new ArrayList<>();
+    private ArrayList<String> logFase = new ArrayList<>();
     private Timeline breathingTimeline;
     private ScaleTransition scaleTransition;
     private int currentCount = 0;
@@ -304,6 +309,9 @@ public class LaperController2 implements Initializable {
         setInputFieldsDisabled(false);
         
         updateProgressLabels();
+
+        logFase.clear();
+        faseListView.getItems().clear();
     }
     
     private void startBreathingCycle() {
@@ -405,43 +413,57 @@ public class LaperController2 implements Initializable {
         scaleTransition.play();
     }
     
-    private void moveToNextPhase() {
-        switch (currentBreathingPhase) {
-            case INHALE:
-                currentBreathingPhase = BreathingPhase.HOLD;
-                break;
-            case HOLD:
-                currentBreathingPhase = BreathingPhase.EXHALE;
-                break;
-            case EXHALE:
-                if (currentCycle < maxCycles) {
-                    currentBreathingPhase = BreathingPhase.PAUSE;
-                } else {
-                    completeExercise();
-                    return;
-                }
-                break;
-            case PAUSE:
-                startBreathingCycle();
+   private void moveToNextPhase() {
+    logFase.add(currentBreathingPhase.name()); // Simpan ke ArrayList
+
+    faseListView.getItems().add(currentBreathingPhase.name()); // Tampilkan di GUI
+
+    switch (currentBreathingPhase) {
+        case INHALE:
+            currentBreathingPhase = BreathingPhase.HOLD;
+            break;
+        case HOLD:
+            currentBreathingPhase = BreathingPhase.EXHALE;
+            break;
+        case EXHALE:
+            if (currentCycle < maxCycles) {
+                currentBreathingPhase = BreathingPhase.PAUSE;
+            } else {
+                completeExercise();
                 return;
+            }
+            break;
+        case PAUSE:
+            startBreathingCycle();
+            return;
         }
-        
-        startPhase();
+
+    startPhase();
+    }
+
+    private void printLogFase() {
+    System.out.println("Log Fase Pernapasan:");
+    for (int i = 0; i < logFase.size(); i++) {
+        System.out.println("Fase ke-" + (i + 1) + ": " + logFase.get(i));
+        }
     }
     
-    private void completeExercise() {
-        isRunning = false;
-        headerLabel.setText("Latihan selesai! Bagus!");
-        currentPhase = "Selesai";
-        
-        // Reset circle to normal size
-        resetCircleSize();
-        
-        mulaiBtn.setDisable(false);
-        jedaBtn.setDisable(true);
-        setInputFieldsDisabled(false);
-        
-        updateProgressLabels();
+   private void completeExercise() {
+    isRunning = false;
+    headerLabel.setText("Latihan selesai! Bagus!");
+    currentPhase = "Selesai";
+
+    // Simpan durasi atau informasi siklus ke array list
+    durasiSetiapSiklus.add(currentCycle);
+
+    // Reset circle
+    resetCircleSize();
+
+    mulaiBtn.setDisable(false);
+    jedaBtn.setDisable(true);
+    setInputFieldsDisabled(false);
+    
+    updateProgressLabels();
     }
     
     private void updateProgressLabels() {
@@ -456,4 +478,5 @@ public class LaperController2 implements Initializable {
         hembuskanField.setDisable(disabled);
         siklusField.setDisable(disabled);
     }
+    
 }

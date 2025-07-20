@@ -225,17 +225,17 @@ public class ArticleController implements Initializable {
     @FXML
     private void handleDashboard(ActionEvent event) {
         dashboardBtn.setStyle("-fx-background-color: #238B83; -fx-text-fill: white; -fx-alignment: center-left; -fx-padding: 0 0 0 40; -fx-border-color: transparent; -fx-font-size: 16;");
-            Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/view/dashboard.fxml"));
+              try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        if (root != null) {
-            Stage stage = (Stage)((javafx.scene.Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            showAlert("Error", "Gagal membuka halaman Dashboard.");
         }
     resetNavigation();
 }

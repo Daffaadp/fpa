@@ -16,8 +16,9 @@ public class Maindashboard extends Application {
             
             primaryStage.setTitle("Dashboard");
             primaryStage.setScene(scene);
-            primaryStage.setResizable(true);
             primaryStage.setFullScreen(true);
+            primaryStage.setMinWidth(1000);
+            primaryStage.setMinHeight(700);
             primaryStage.show();
 
         } catch (Exception e) {

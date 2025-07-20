@@ -81,9 +81,8 @@
             </children>
          </VBox>
          <Region prefHeight="200.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
-         <VBox alignment="CENTER" prefHeight="86.0" prefWidth="250.0" spacing="10" style="-fx-padding: 20;">
+         <VBox alignment="CENTER" prefHeight="124.0" prefWidth="250.0" spacing="10" style="-fx-padding: 20;">
             <children>
-               <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
                <HBox alignment="CENTER" spacing="10" />
             </children>
          </VBox>

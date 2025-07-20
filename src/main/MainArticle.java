@@ -15,12 +15,12 @@ public class MainArticle extends Application {
             Parent root = loader.load();
             
             // Create the scene
-            Scene scene = new Scene(root, 1200, 800);
+            Scene scene = new Scene(root, 1000, 700);
             
             // Set up the stage
             primaryStage.setTitle("LAPER - Article Management System");
             primaryStage.setScene(scene);
-            primaryStage.setResizable(true);
+            primaryStage.setFullScreen(true);
             primaryStage.setMinWidth(1000);
             primaryStage.setMinHeight(700);
             

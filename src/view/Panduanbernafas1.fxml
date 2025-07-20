@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -13,10 +14,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<BorderPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #A3D5FF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LaperController2">
+<BorderPane prefHeight="725.0" prefWidth="1092.0" style="-fx-background-color: #A3D5FF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LaperController2">
    <left>
       <!-- Navbar -->
-     <VBox prefHeight="700.0" prefWidth="250.0" style="-fx-background-color: #006064; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 2, 0);">
+     <VBox prefHeight="729.0" prefWidth="250.0" style="-fx-background-color: #006064; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 2, 0);">
       <children>
          <VBox alignment="CENTER" spacing="10" style="-fx-padding: 30 20 20 20;">
             <children>
@@ -84,30 +85,22 @@
             </children>
          </VBox>
          <Region prefHeight="200.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
-         <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
-            <children>
-               <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
-               <HBox alignment="CENTER" spacing="10">
-                  <children>
-                     <Label style="-fx-font-size: 16px;" text="👤" />
-                     <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Profile" />
-                  </children>
-               </HBox>
-            </children>
-         </VBox>
+         <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;" />
       </children>
    </VBox>
    </left>
    
    <center>
       <!-- Main Content Area -->
-      <VBox style="-fx-background-color: #E5FBFD; -fx-padding: 30;">
+      <VBox prefHeight="725.0" prefWidth="1027.0" style="-fx-background-color: #E5FBFD; -fx-padding: 30;">
          <children>
             <!-- Header -->
             <HBox alignment="CENTER">
                <children>
                   <Label fx:id="headerLabel" style="-fx-background-color: white; -fx-padding: 15 30; -fx-background-radius: 10; -fx-text-fill: #333; -fx-font-size: 18px; -fx-font-weight: bold;" text="Bersiap untuk memulai...">
-                  </Label>
+                     <HBox.margin>
+                        <Insets right="200.0" />
+                     </HBox.margin></Label>
                </children>
                <VBox.margin>
                   <Insets bottom="30.0" />
@@ -195,6 +188,7 @@
                         </VBox>
                      </children>
                   </VBox>
+                  <ListView fx:id="faseListView" prefHeight="150.0" prefWidth="200.0" />
                </children>
             </HBox>
          </children>

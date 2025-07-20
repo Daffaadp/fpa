@@ -20,7 +20,7 @@ public class Mainkusioner extends Application {
             // Set stage properties
             primaryStage.setTitle("LAPER - Mental Health Companion");
             primaryStage.setScene(scene);
-            primaryStage.setResizable(true);
+            primaryStage.setFullScreen(true);
             primaryStage.setMinWidth(1000);
             primaryStage.setMinHeight(700);
             

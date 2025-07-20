@@ -13,11 +13,11 @@ public class Mainpanduanbrnfs extends Application {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Panduanbernafas1.fxml"));
             Scene scene = new Scene(loader.load());
-            Parent root = FXMLLoader.load(getClass().getResource("/view/Panduanbernafas1.fxml")); 
             primaryStage.setTitle("LAPER - Mental Health Companion");
             primaryStage.setScene(scene);
-            primaryStage.setMinWidth(1200);
-            primaryStage.setMinHeight(800);
+            primaryStage.setFullScreen(true);
+            primaryStage.setMinWidth(1000);
+            primaryStage.setMinHeight(700);
             primaryStage.show();
             
         } catch (Exception e) {
