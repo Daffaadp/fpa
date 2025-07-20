@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Mainkusioner",
+            "request": "launch",
+            "mainClass": "main.Mainkusioner",
+            "projectName": "fpa_dc3ba7d6"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "main.Main",
+            "projectName": "fpa_dc3ba7d6"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "main.Main",
