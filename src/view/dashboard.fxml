@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="711.0" prefWidth="1324.0" style="-fx-background-color: #E0F7FA;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardCont">
+    <VBox prefHeight="711.0" prefWidth="250.0" style="-fx-background-color: #006064; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 2, 0);">
+      <children>
+         <VBox alignment="CENTER" spacing="10" style="-fx-padding: 30 20 20 20;">
+            <children>
+               <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" text=" LAPER" />
+               <Label style="-fx-font-size: 12px; -fx-text-fill: #b2dfdb; -fx-text-alignment: center;" text="Mental Health Companion" />
+            </children>
+         </VBox>
+         <VBox spacing="5" style="-fx-padding: 20 10;">
+            <children>
+               <Button fx:id="btnDashboard" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleDashboardMenu" style="-fx-background-color: #4db6ac; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                  <graphic>
+                     <HBox alignment="CENTER_LEFT" spacing="12">
+                        <children>
+                           <Label style="-fx-font-size: 16px;" text="🏠" />
+                           <Label style="-fx-font-size: 14px; -fx-text-fill: white;" text="Dashboard" />
+                        </children>
+                     </HBox>
+                  </graphic>
+               </Button>
+               <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
+               <VBox spacing="2" style="-fx-padding: 10 0;">
+                  <children>
+                     <Button fx:id="btnArtikel" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleArtikelMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                        <graphic>
+                           <HBox alignment="CENTER_LEFT" spacing="12">
+                              <children>
+                                 <Label style="-fx-font-size: 16px;" text="📖" />
+                                 <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Membaca Artikel" />
+                              </children>
+                           </HBox>
+                        </graphic>
+                     </Button>
+                     <Button fx:id="btnPernapasan" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handlePernapasanMenu" style="-fx-background-color: transparent; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                        <graphic>
+                           <HBox alignment="CENTER_LEFT" spacing="12">
+                              <children>
+                                 <Label style="-fx-font-size: 16px;" text="🧘" />
+                                 <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Latihan Pernapasan" />
+                              </children>
+                           </HBox>
+                        </graphic>
+                     </Button>
+                     <Button fx:id="btnKuesioner" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleKuesionerMenu" style="-fx-background-color: transparent ; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                        <graphic>
+                           <HBox alignment="CENTER_LEFT" spacing="12">
+                              <children>
+                                 <Label style="-fx-font-size: 16px;" text="📊" />
+                                 <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfdb;" text="Isi Kuesioner" />
+                              </children>
+                           </HBox>
+                        </graphic>
+                     </Button>
+                     <Button fx:id="btnTodoList" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleTodoListMenu" style="-fx-background-color: transparent ; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                        <graphic>
+                           <HBox alignment="CENTER_LEFT" spacing="12">
+                              <children>
+                                 <Label style="-fx-font-size: 16px;" text="✅" />
+                                 <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfbd;" text="To Do List" />
+                              </children>
+                           </HBox>
+                        </graphic>
+                     </Button>
+                  </children>
+               </VBox>
+            </children>
+         </VBox>
+         <Region prefHeight="200.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
+         <VBox alignment="CENTER" prefHeight="108.0" prefWidth="250.0" spacing="10" style="-fx-padding: 20;">
+            <children>
+               <Separator style="-fx-background-color: #4db6ac; -fx-opacity: 0.3;" />
+               <HBox alignment="CENTER" spacing="10" />
+               <Button fx:id="btnLogout" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#handleLogoutMenu" style="-fx-background-color: transparent ; -fx-text-fill: #b2dfdb; -fx-font-size: 14px; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-radius: 8;">
+                  <graphic>
+                     <HBox alignment="CENTER_LEFT" spacing="12">
+                        <children>
+                           <Label style="-fx-font-size: 16px;" text="🔓" />
+                           <Label style="-fx-font-size: 14px; -fx-text-fill: #b2dfbd;" text="LOGOUT" />
+                        </children>
+                     </HBox>
+                  </graphic>
+               </Button>
+            </children>
+         </VBox>
+      </children>
+    </VBox>
+    
+    <VBox alignment="CENTER" layoutX="580.0" layoutY="106.0" prefHeight="449.0" prefWidth="1111.0" spacing="10" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0">
+        <Label text="Stress &amp; Anxiety">
+            <font>
+                <Font name="System Bold" size="28.0" />
+            </font>
+        </Label>
+
+        <Label text="Reduce stress and anxiety with breathing exercises and helpful activities." wrapText="true">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="greetingLabel" text="Selamat datang!" wrapText="true">
+    <font>
+        <Font size="16.0" />
+    </font>
+</Label>
+        
+        <GridPane alignment="CENTER" hgap="20.0" prefHeight="291.0" prefWidth="1084.0" vgap="20.0">
+            <children>
+               <!-- To-Do List -->
+                    <VBox fx:id="todoBox" alignment="CENTER" onMouseClicked="#handleTodoClick" spacing="5.0" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 10;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label style="-fx-font-size: 24;" text="📝" />
+                        <Label style="-fx-font-weight: bold;" text="To-Do List" />
+                        <Label text="Manage your tasks" />
+                    </VBox>
+
+            <!-- Breathing Guide -->
+            <VBox fx:id="breathingBox" alignment="CENTER" onMouseClicked="#handleBreathingClick" prefHeight="109.0" prefWidth="490.0" spacing="5" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Label style="-fx-font-size: 24;" text="🌬" />
+                <Label style="-fx-font-weight: bold;" text="Breathing Guide" />
+                <Label text="Follow breathing" />
+            </VBox>
+
+            <!-- Articles -->
+            <VBox fx:id="articlesBox" alignment="CENTER" onMouseClicked="#handleArticlesClick" prefHeight="122.0" prefWidth="409.0" spacing="5" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 10;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <Label style="-fx-font-size: 24;" text="📄" />
+                <Label style="-fx-font-weight: bold;" text="Articles" />
+                <Label text="Read helpful articles" />
+            </VBox>
+
+            <!-- Questionnaires -->
+            <VBox fx:id="questionnairesBox" alignment="CENTER" onMouseClicked="#handleQuestionnairesClick" prefHeight="134.0" prefWidth="478.0" spacing="5" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Label style="-fx-font-size: 24;" text="🖊" />
+                <Label style="-fx-font-weight: bold;" text="Questionnaires" />
+                <Label text="Answer questions" />
+            </VBox>
+            </children>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+    </VBox>
+</AnchorPane>
