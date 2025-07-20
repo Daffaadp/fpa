@@ -155,7 +155,7 @@
                     </VBox>
 
                     <!-- Question 5: Breathing Exercise -->
-                    <VBox spacing="15">
+                    <VBox maxHeight="1500.0" spacing="15">
                         <Label style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #34495e;" text="5. Apakah Anda melakukan aktivitas relaksasi (seperti meditasi atau latihan pernapasan) hari ini?" />
                         <VBox spacing="8">
                             <HBox alignment="CENTER_LEFT" spacing="15">
@@ -172,7 +172,7 @@
                 <Button fx:id="btnSubmit" onAction="#handleSubmit" prefHeight="45" prefWidth="200" style="-fx-background-color: #006064; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 25; -fx-border-radius: 25;" text="SUBMIT ANSWERS" />
 
                 <!-- Result Area -->
-                <TextArea fx:id="resultArea" maxWidth="700" style="-fx-background-color: #f8f9fa; -fx-padding: 20; -fx-background-radius: 10; -fx-border-radius: 10;" visible="false" wrapText="true" />
+                <TextArea fx:id="resultArea" maxHeight="500.0" maxWidth="700.0" style="-fx-background-color: #f8f9fa; -fx-padding: 20; -fx-background-radius: 10; -fx-border-radius: 10;" visible="false" wrapText="true" />
 
             </VBox>
 

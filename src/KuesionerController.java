@@ -207,7 +207,7 @@ public class KuesionerController {
         resultArea.setText(result);
         resultArea.setVisible(true);
         
-        System.out.println("Hasil Kuesioner:");
+        System.out.println("Hasil kusioner:");
         System.out.println(result);
     }
     
