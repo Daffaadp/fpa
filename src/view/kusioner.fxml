@@ -15,17 +15,7 @@
 <AnchorPane prefHeight="765.0" prefWidth="1270.0" style="-fx-background-color: #e0f7fa;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.KuesionerController">
 
     <!-- Left Sidebar Navigation -->
-    <VBox prefWidth="250.0" style="-fx-background-color: #006064; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 2, 0);">
-        <children>
-            <VBox alignment="CENTER" spacing="10" style="-fx-padding: 30 20 20 20;">
-                <children>
-               <ImageView fitHeight="161.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../../../logo.png" />
-                  </image>
-               </ImageView>
-                    <Label style="-fx-font-size: 12px; -fx-text-fill: #b2dfdb; -fx-text-alignment: center;" text="Mental Health Companion" />
-                </children>
+
             </VBox>
             <VBox spacing="5" style="-fx-padding: 20 10;">
                 <children>

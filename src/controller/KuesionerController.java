@@ -214,11 +214,6 @@ public class KuesionerController {
         String result = generateEnhancedResult();
         resultArea.setText(result);
         resultArea.setVisible(true);
-        
-        // Scroll to result area
-        resultArea.setScrollTop(0);
-        
-        System.out.println("Hasil Kuesioner:");
         System.out.println(result);
     }
     
