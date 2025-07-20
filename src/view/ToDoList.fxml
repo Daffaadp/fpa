@@ -4,6 +4,8 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -58,7 +60,11 @@
       <children>
          <VBox alignment="CENTER" spacing="10" style="-fx-padding: 30 20 20 20;">
             <children>
-               <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" text=" LAPER" />
+               <ImageView fitHeight="161.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../../../logo.png" />
+                  </image>
+               </ImageView>
                <Label style="-fx-font-size: 12px; -fx-text-fill: #b2dfdb; -fx-text-alignment: center;" text="Mental Health Companion" />
             </children>
          </VBox>
