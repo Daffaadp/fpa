@@ -9,7 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
-
+import java.util.Queue;
+import java.util.LinkedList;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Iterator;
 
 public class ArticleController implements Initializable {
     
@@ -30,7 +32,6 @@ public class ArticleController implements Initializable {
     @FXML private Button addArticleBtn;
     @FXML private Button manageArticleBtn;
   
-    
     @FXML private VBox readArticleView;
     @FXML private VBox addArticleView;
     @FXML private VBox manageArticleView;
@@ -48,32 +49,39 @@ public class ArticleController implements Initializable {
     
     // Data storage
     private List<Article> articles;
+    private final int MAX_ARTICLE_COUNT = 5;
+    private Queue<Article> articleQueue;
     
     // Article class to store article data
     public static class Article {
         private String title;
         private String url;
         private String description;
-        
+        private boolean deleted;
+
         public Article(String title, String url, String description) {
             this.title = title;
             this.url = url;
             this.description = description;
+            this.deleted = false;
         }
         
         public String getTitle() { return title; }
         public String getUrl() { return url; }
         public String getDescription() { return description; }
+        public boolean isDeleted() { return deleted; }
         
         public void setTitle(String title) { this.title = title; }
         public void setUrl(String url) { this.url = url; }
         public void setDescription(String description) { this.description = description; }
+        public void setDeleted(boolean deleted) { this.deleted = deleted; }
     }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize data
         articles = new ArrayList<>();
+        articleQueue = new LinkedList<>();
         
         // Set current date
         updateDateLabel();
@@ -95,29 +103,41 @@ public class ArticleController implements Initializable {
     }
     
     private void addSampleArticles() {
-        articles.add(new Article(
-            "Teknik Pernapasan untuk Mengurangi Stres",
-            "https://www.halodoc.com/artikel/teknik-pernapasan-untuk-mengurangi-stres",
-            "Pelajari berbagai teknik pernapasan yang dapat membantu mengurangi tingkat stres dan kecemasan dalam kehidupan sehari-hari."
-        ));
+        Article article1 = new Article(
+            "5 teknik latihan pernapasan untuk menjaga fungsi paru-paru",
+            "https://www.alodokter.com/5-teknik-latihan-pernapasan-untuk-menjaga-fungsi-paru-paru",
+            "Ada beragam teknik latihan pernapasan yang mampu memperkuat otot pernapasan. Bila dilakukan dengan benar dan rutin, teknik ini bisa membuat paru-paru berfungsi lebih baik untuk memenuhi kebutuhan oksigen dalam tubuh."
+        );
         
-        articles.add(new Article(
+        Article article2 = new Article(
             "Pentingnya Tidur Berkualitas untuk Kesehatan Mental",
-            "https://www.alodokter.com/tidur-berkualitas-untuk-kesehatan-mental",
-            "Memahami hubungan antara kualitas tidur dan kesehatan mental, serta tips untuk mendapatkan tidur yang lebih baik."
-        ));
+            "https://www.halodoc.com/artikel/ini-5-cara-mengatasi-insomnia-tanpa-obat-obatan?srsltid=AfmBOoqh3hCZHpNirtdYDLvPXTzGbcrwulMKupJaZYQzhfBb5tKfNmVo",
+            "Insomnia adalah gangguan tidur yang dapat memengaruhi kesehatan fisik dan mental. Selain menggunakan obat-obatan, kamu juga bisa mengatasi masalah ini melalui kebiasaan sehat, seperti berolahraga secara rutin dan menggunakan aromaterapi sebelum tidur."
+        );
         
-        articles.add(new Article(
-            "Mindfulness dalam Kehidupan Sehari-hari",
-            "https://www.sehatmental.id/mindfulness-kehidupan-sehari-hari",
-            "Cara menerapkan praktik mindfulness dalam aktivitas harian untuk meningkatkan kesehatan mental dan kesejahteraan."
-        ));
+        Article article3 = new Article(
+            "Ini Pentingnya Menjaga Kesehatan Mental Remaja",
+            "https://www.halodoc.com/artikel/ini-pentingnya-menjaga-kesehatan-mental-remaja?srsltid=AfmBOop1UTlRI8VSisnRyiLpavopB9X2KaGCUi-rYZYFgALJoM3wLsq6",
+            "Kesehatan mental pada remaja perlu menjadi perhatian para orangtua. Sebab, seseorang yang mengalami gangguan mental bisa jadi salah satu faktor yang dapat memicu berbagai masalah, termasuk depresi dan bunuh diri."
+        );
         
-        articles.add(new Article(
-            "Mengatasi Kecemasan dengan Teknik Grounding",
+        Article article4 = new Article(
+            "Olahraga Pernapasan Baik Untuk Mental, Masa Sih?",
             "https://www.kompas.com/health/read/2023/07/15/teknik-grounding-untuk-kecemasan",
-            "Teknik grounding yang efektif untuk membantu mengatasi serangan kecemasan dan panic attack."
-        ));
+            "Selain menyehatkan fisik, tentunya olahraga juga bisa membuat emosi atau mental kian terjaga kesehatannya. Manfaat olahraga pernapasan seperti yoga, chikung, atau taichi mampu meningkatkan konsentrasi dan mengendalikan nafas dengan baik. Nah, dengan begitu beban atau pikiran yang penat karena berbagai tekanan yang menumpuk bakal berkurang. Kok bisa?"
+        );
+        
+        // Tambahkan ke kedua list
+        articles.add(article1);
+        articles.add(article2);
+        articles.add(article3);
+        articles.add(article4);
+        
+        // Tambahkan juga ke queue untuk tampil di read view
+        articleQueue.add(article1);
+        articleQueue.add(article2);
+        articleQueue.add(article3);
+        articleQueue.add(article4);
     }
     
     private void loadArticles() {
@@ -128,15 +148,19 @@ public class ArticleController implements Initializable {
     private void loadReadArticleView() {
         articleListContainer.getChildren().clear();
         
-        for (Article article : articles) {
-            VBox articleCard = createArticleCard(article, false);
-            articleListContainer.getChildren().add(articleCard);
+        // Tampilkan artikel yang tidak dihapus dari queue
+        for (Article article : articleQueue) {
+            if (!article.isDeleted()) {
+                VBox articleCard = createArticleCard(article, false);
+                articleListContainer.getChildren().add(articleCard);
+            }
         }
     }
     
     private void loadManageArticleView() {
         manageArticleContainer.getChildren().clear();
         
+        // Tampilkan semua artikel (termasuk yang dihapus) di manage view
         for (Article article : articles) {
             VBox articleCard = createArticleCard(article, true);
             manageArticleContainer.getChildren().add(articleCard);
@@ -147,6 +171,11 @@ public class ArticleController implements Initializable {
         VBox card = new VBox(10);
         card.setStyle("-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);");
         card.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        
+        // Jika artikel sudah dihapus, beri style berbeda
+        if (article.isDeleted()) {
+            card.setStyle("-fx-background-color: #f5f5f5; -fx-border-color: #cccccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 20; -fx-opacity: 0.6;");
+        }
         
         // Title
         Label titleLabel = new Label(article.getTitle());
@@ -171,13 +200,41 @@ public class ArticleController implements Initializable {
         readButton.setStyle("-fx-background-color: #2D9A93; -fx-text-fill: white; -fx-font-size: 12; -fx-padding: 8 15; -fx-background-radius: 5;");
         readButton.setOnAction(e -> openArticleInBrowser(article.getUrl()));
         
+        // Jika artikel dihapus, disable tombol baca
+        if (article.isDeleted()) {
+            readButton.setDisable(true);
+            readButton.setStyle("-fx-background-color: #cccccc; -fx-text-fill: #666666; -fx-font-size: 12; -fx-padding: 8 15; -fx-background-radius: 5;");
+        }
+        
         buttonBox.getChildren().add(readButton);
         
         if (showDeleteButton) {
-            Button deleteButton = new Button("Hapus");
-            deleteButton.setStyle("-fx-background-color: #E53E3E; -fx-text-fill: white; -fx-font-size: 12; -fx-padding: 8 15; -fx-background-radius: 5;");
-            deleteButton.setOnAction(e -> deleteArticle(article));
-            buttonBox.getChildren().add(deleteButton);
+            if (!article.isDeleted()) {
+                // Tombol Hapus
+                Button deleteButton = new Button("Hapus");
+                deleteButton.setStyle("-fx-background-color: #E53E3E; -fx-text-fill: white; -fx-font-size: 12; -fx-padding: 8 15; -fx-background-radius: 5;");
+                deleteButton.setOnAction(e -> deleteArticle(article));
+                buttonBox.getChildren().add(deleteButton);
+            } else {
+                // Tombol Pulihkan jika sudah dihapus
+                Button restoreButton = new Button("Pulihkan");
+                restoreButton.setStyle("-fx-background-color: #38A169; -fx-text-fill: white; -fx-font-size: 12; -fx-padding: 8 15; -fx-background-radius: 5;");
+                restoreButton.setOnAction(e -> restoreArticle(article));
+                buttonBox.getChildren().add(restoreButton);
+                
+                // Tombol Hapus Permanen
+                Button permanentDeleteButton = new Button("Hapus Permanen");
+                permanentDeleteButton.setStyle("-fx-background-color: #C53030; -fx-text-fill: white; -fx-font-size: 12; -fx-padding: 8 15; -fx-background-radius: 5;");
+                permanentDeleteButton.setOnAction(e -> permanentDeleteArticle(article));
+                buttonBox.getChildren().add(permanentDeleteButton);
+            }
+        }
+
+        // Label status jika artikel dihapus
+        if (article.isDeleted()) {
+            Label deletedLabel = new Label("Artikel telah dihapus");
+            deletedLabel.setStyle("-fx-font-size: 12; -fx-text-fill: red; -fx-font-style: italic;");
+            card.getChildren().add(deletedLabel);
         }
         
         card.getChildren().addAll(titleLabel, descLabel, urlLabel, buttonBox);
@@ -190,7 +247,6 @@ public class ArticleController implements Initializable {
             if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().browse(new URI(url));
             } else {
-                // Fallback for systems that don't support Desktop
                 showAlert("Info", "Tidak dapat membuka browser. URL: " + url);
             }
         } catch (Exception e) {
@@ -198,6 +254,7 @@ public class ArticleController implements Initializable {
         }
     }
     
+    // Method untuk menghapus artikel (soft delete)
     private void deleteArticle(Article article) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Konfirmasi Hapus");
@@ -206,9 +263,43 @@ public class ArticleController implements Initializable {
         
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                articles.remove(article);
-                loadArticles();
+                article.setDeleted(true);
+                loadArticles(); // Refresh tampilan
                 showAlert("Sukses", "Artikel berhasil dihapus!");
+            }
+        });
+    }
+    
+    // Method untuk memulihkan artikel yang dihapus
+    private void restoreArticle(Article article) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Konfirmasi Pulihkan");
+        alert.setHeaderText("Pulihkan Artikel");
+        alert.setContentText("Apakah Anda yakin ingin memulihkan artikel: " + article.getTitle() + "?");
+        
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                article.setDeleted(false);
+                loadArticles(); // Refresh tampilan
+                showAlert("Sukses", "Artikel berhasil dipulihkan!");
+            }
+        });
+    }
+    
+    // Method untuk menghapus artikel secara permanen
+    private void permanentDeleteArticle(Article article) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Konfirmasi Hapus Permanen");
+        alert.setHeaderText("Hapus Artikel Permanen");
+        alert.setContentText("Apakah Anda yakin ingin menghapus permanen artikel: " + article.getTitle() + "?\nTindakan ini tidak dapat dibatalkan!");
+        
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                // Hapus dari kedua list
+                articles.remove(article);
+                articleQueue.remove(article);
+                loadArticles(); // Refresh tampilan
+                showAlert("Sukses", "Artikel berhasil dihapus permanen!");
             }
         });
     }
@@ -225,7 +316,7 @@ public class ArticleController implements Initializable {
     @FXML
     private void handleDashboard(ActionEvent event) {
         dashboardBtn.setStyle("-fx-background-color: #238B83; -fx-text-fill: white; -fx-alignment: center-left; -fx-padding: 0 0 0 40; -fx-border-color: transparent; -fx-font-size: 16;");
-              try {
+        try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard.fxml"));
             Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
             double width = stage.getWidth();
@@ -237,9 +328,8 @@ public class ArticleController implements Initializable {
             e.printStackTrace();
             showAlert("Error", "Gagal membuka halaman Dashboard.");
         }
-    resetNavigation();
-}
-
+        resetNavigation();
+    }
     
     @FXML
     private void handleReadArticle() {
@@ -255,7 +345,6 @@ public class ArticleController implements Initializable {
     private void handleManageArticle() {
         showManageArticleView();
     }
-    
     
     private void showReadArticleView() {
         resetNavigation();
@@ -298,38 +387,48 @@ public class ArticleController implements Initializable {
         manageArticleBtn.setStyle(defaultStyle);
     }
     
+    // Method untuk menyimpan artikel baru
     @FXML
     private void handleSaveArticle() {
         String title = titleField.getText().trim();
         String url = urlField.getText().trim();
         String description = descriptionField.getText().trim();
         
+        // Validasi input
         if (title.isEmpty() || url.isEmpty() || description.isEmpty()) {
             showAlert("Error", "Semua field harus diisi!");
             return;
         }
         
-        // Basic URL validation
+        // Validasi URL dasar
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
             showAlert("Error", "URL harus dimulai dengan http:// atau https://");
             return;
         }
         
-        // Add new article
+        // Buat artikel baru
         Article newArticle = new Article(title, url, description);
-        articles.add(newArticle);
         
-        // Refresh views
+        // Tambahkan ke kedua list
+        articles.add(newArticle);
+        articleQueue.add(newArticle);
+        
+        // Jika melebihi batas maksimal, hapus artikel terlama dari queue
+        if (articleQueue.size() > MAX_ARTICLE_COUNT) {
+            articleQueue.poll(); // Hapus artikel pertama (terlama)
+        }
+        
+        // Refresh tampilan
         loadArticles();
         
-        // Clear form
+        // Bersihkan form
         titleField.clear();
         urlField.clear();
         descriptionField.clear();
         
         showAlert("Sukses", "Artikel berhasil ditambahkan!");
         
-        // Switch to read article view
+        // Pindah ke tampilan baca artikel
         showReadArticleView();
     }
     
@@ -339,5 +438,21 @@ public class ArticleController implements Initializable {
         urlField.clear();
         descriptionField.clear();
         showReadArticleView();
+    }
+
+    @FXML
+    private void handleHistory(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/history.fxml"));
+            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            Scene scene = new Scene(root, width, height);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Gagal membuka halaman Riwayat.");
+        }
     }
 }
